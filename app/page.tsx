@@ -9,8 +9,7 @@ import {
   Wrench, ArrowRight
 } from "lucide-react";
 
-const contactLink =
-  "mailto:nuvixhub@outlook.com?subject=Solicitação de Demonstração&body=Olá,%20gostaria%20de%20conhecer%20a%20plataforma%20Nuvix%20Hub.";
+const contactLink = "https://tally.so/r/Bz5ERA";
 
 function Cloud3D() {
   return (
