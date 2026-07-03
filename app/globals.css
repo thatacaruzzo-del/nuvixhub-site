@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   --purple: #7c3aed;
@@ -8,7 +6,9 @@
 }
 
 * { box-sizing: border-box; }
+
 html { scroll-behavior: smooth; }
+
 body {
   margin: 0;
   background: #ffffff;
@@ -29,9 +29,7 @@ body {
     linear-gradient(180deg, #fff, #faf7ff);
 }
 
-.float {
-  animation: float 5s ease-in-out infinite;
-}
+.float { animation: float 5s ease-in-out infinite; }
 
 .float-delay {
   animation: float 6s ease-in-out infinite;
@@ -39,7 +37,7 @@ body {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
+  0%,100% { transform: translateY(0); }
   50% { transform: translateY(-16px); }
 }
 
@@ -56,8 +54,9 @@ body {
 .card-hover {
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
+
 .card-hover:hover {
   transform: translateY(-6px);
-  box-shadow: 0 24px 80px rgba(42, 20, 90, 0.13);
-  border-color: rgba(124, 58, 237, 0.35);
+  box-shadow: 0 24px 80px rgba(42,20,90,.13);
+  border-color: rgba(124,58,237,.35);
 }
