@@ -3,9 +3,10 @@
 import { Canvas } from "@react-three/fiber";
 import { Float, OrbitControls, RoundedBox, Sphere } from "@react-three/drei";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
-  BarChart3, BriefcaseBusiness, CheckCircle2, ClipboardList, Cog, Database,
-  DollarSign, FileText, Layers3, Mail, Package, ShieldCheck, Sparkles, Users,
+  BarChart3, BriefcaseBusiness, CheckCircle2, ClipboardList, Cloud, Cog, Database,
+  DollarSign, FileText, Layers3, Mail, Package, ShieldCheck, Users,
   Wrench, ArrowRight
 } from "lucide-react";
 
@@ -69,8 +70,8 @@ function Cloud3D() {
 function Logo() {
   return (
     <div className="flex items-center gap-3">
-      <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-lg shadow-purple-200">
-        <Sparkles size={20} />
+      <div className="h-11 w-11 overflow-hidden rounded-2xl shadow-lg shadow-purple-200">
+        <Image src="/logo.png" alt="Nuvix" width={44} height={44} className="h-full w-full object-cover" />
       </div>
       <div className="leading-none">
         <p className="text-xl font-black tracking-tight text-slate-950">Nuvix</p>
@@ -109,14 +110,18 @@ function MiniDashboard() {
             <p className="mt-2 text-purple-100">Prestação de Serviço · Visão geral</p>
           </div>
           <div className="float rounded-3xl bg-white/20 px-5 py-4 backdrop-blur">
-            ☁️
+            <Cloud size={22} />
           </div>
         </div>
         <div className="mt-8 grid grid-cols-3 gap-4">
-          {["Receita R$ 8.2M", "Clientes 428", "OS abertas 1.284"].map((item) => (
-            <div key={item} className="rounded-2xl bg-white/14 p-4 backdrop-blur">
-              <p className="text-sm font-bold">{item}</p>
-              <p className="mt-1 text-xs text-purple-100">em tempo real</p>
+          {[
+            ["Caixa disponível", "R$ 12.400"],
+            ["Clientes ativos", "18"],
+            ["OS abertas", "6"],
+          ].map(([lbl, val]) => (
+            <div key={lbl} className="rounded-2xl bg-white/14 p-4 backdrop-blur">
+              <p className="text-sm font-bold">{val}</p>
+              <p className="mt-1 text-xs text-purple-100">{lbl}</p>
             </div>
           ))}
         </div>
@@ -171,14 +176,26 @@ export default function Home() {
         <div className="mx-auto grid min-h-[760px] max-w-7xl items-center gap-12 px-6 py-16 md:grid-cols-2">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }}>
             <div className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-white px-4 py-2 text-sm font-black uppercase tracking-[0.18em] text-purple-600 shadow-sm">
-              <span className="h-2 w-2 rounded-full bg-purple-500" /> Sistema Operacional Empresarial
+              <span className="h-2 w-2 rounded-full bg-purple-500" /> Feito pra pequenos negócios de serviço
             </div>
             <h1 className="mt-8 text-5xl font-black tracking-tight text-slate-950 md:text-7xl">
-              Toda a operação da sua empresa em <span className="gradient-text">um único lugar.</span>
+              Entenda sua empresa em <span className="gradient-text">30 segundos.</span>
             </h1>
             <p className="mt-7 max-w-xl text-xl leading-9 text-slate-600">
-              Centralize financeiro, CRM, Ordens de Serviço, RH, materiais, clientes e indicadores em uma plataforma inteligente.
+              Chega de planilha e achismo. Se não tiver dado suficiente pra um diagnóstico, a Nuvix avisa — nunca inventa número só pra parecer inteligente.
             </p>
+
+            <div className="mt-7 max-w-md rounded-2xl border border-slate-100 bg-white p-4 shadow-soft">
+              <p className="text-[11px] font-black uppercase tracking-[0.14em] text-purple-500">Inteligência Nuvix</p>
+              <div className="mt-2 flex items-start gap-2">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-500" />
+                <p className="text-sm leading-6 text-slate-800">
+                  <b className="font-bold">Despesas em Combustível subiram 18% este mês.</b> Foi a categoria que mais cresceu em relação ao mês anterior.
+                </p>
+              </div>
+              <p className="mt-3 border-t border-slate-100 pt-3 text-[11px] text-slate-400">Confiança: alta · calculado com dados confirmados</p>
+            </div>
+
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
               <a href={contactLink} className="inline-flex items-center justify-center gap-2 rounded-2xl bg-purple-600 px-7 py-4 font-black text-white shadow-xl shadow-purple-200 hover:bg-purple-700">
                 Solicitar demonstração <ArrowRight size={18} />
@@ -187,10 +204,10 @@ export default function Home() {
                 Conhecer a plataforma
               </a>
             </div>
-            <div className="mt-8 flex flex-wrap gap-4 text-sm font-bold text-slate-500">
-              <span>☁️ 100% em nuvem</span>
-              <span>🔒 Segurança corporativa</span>
-              <span>📊 Dados em tempo real</span>
+            <div className="mt-8 flex flex-wrap gap-5 text-sm font-bold text-slate-500">
+              <span className="inline-flex items-center gap-2"><Cloud size={16} className="text-purple-500" /> 100% em nuvem</span>
+              <span className="inline-flex items-center gap-2"><ShieldCheck size={16} className="text-purple-500" /> Diagnóstico honesto</span>
+              <span className="inline-flex items-center gap-2"><Database size={16} className="text-purple-500" /> Tudo conectado</span>
             </div>
           </motion.div>
 
@@ -227,6 +244,7 @@ export default function Home() {
       <section id="produto" className="bg-slate-50 px-6 py-24">
         <SectionTitle eyebrow="Plataforma" title="Tudo conectado em tempo real." subtitle="A Nuvix une os módulos essenciais da operação para transformar dados em gestão." />
         <MiniDashboard />
+        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-slate-400">Tela ilustrativa, com dados de exemplo — na Nuvix de verdade, os números são sempre os seus.</p>
       </section>
 
       <section id="modulos" className="px-6 py-24">
