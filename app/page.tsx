@@ -5,7 +5,7 @@ import { Float, OrbitControls, RoundedBox, Sphere } from "@react-three/drei";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import {
-  BarChart3, BriefcaseBusiness, CheckCircle2, ClipboardList, Cloud, Cog, Database,
+  BarChart3, BriefcaseBusiness, CheckCircle2, ClipboardList, Cloud, Cog, Compass, Database,
   DollarSign, FileText, Layers3, Mail, Package, ShieldCheck, Users,
   Wrench, ArrowRight
 } from "lucide-react";
@@ -105,7 +105,7 @@ function MiniDashboard() {
       <div className="rounded-[24px] bg-gradient-to-br from-[#240B55] to-[#8845F4] p-7 text-white">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-purple-200">Boa tarde — Nuvix</p>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-purple-200">Boa tarde · Nuvix</p>
             <h3 className="mt-3 text-3xl font-black">Dashboard Executivo</h3>
             <p className="mt-2 text-purple-100">Prestação de Serviço · Visão geral</p>
           </div>
@@ -182,7 +182,7 @@ export default function Home() {
               Entenda sua empresa em <span className="gradient-text">30 segundos.</span>
             </h1>
             <p className="mt-7 max-w-xl text-xl leading-9 text-slate-600">
-              Chega de planilha e achismo. Se não tiver dado suficiente pra um diagnóstico, a Nuvix avisa — nunca inventa número só pra parecer inteligente.
+              Chega de planilha e achismo. A Nuvix não automatiza sua decisão por você. Mostra o dado real e a sugestão, e quem decide continua sendo você.
             </p>
 
             <div className="mt-7 max-w-md rounded-2xl border border-slate-100 bg-white p-4 shadow-soft">
@@ -194,6 +194,20 @@ export default function Home() {
                 </p>
               </div>
               <p className="mt-3 border-t border-slate-100 pt-3 text-[11px] text-slate-400">Confiança: alta · calculado com dados confirmados</p>
+            </div>
+
+            {/* Segundo exemplo: mostra o outro lado da mesma promessa do subtítulo — quando
+                não há dado suficiente, o sistema avisa em vez de arriscar um número. Sem selo
+                de confiança nenhum aqui, de propósito. */}
+            <div className="mt-3 max-w-md rounded-2xl border border-slate-100 bg-white p-4 shadow-soft">
+              <p className="text-[11px] font-black uppercase tracking-[0.14em] text-purple-500">Inteligência Nuvix</p>
+              <div className="mt-2 flex items-start gap-2">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-slate-400" />
+                <p className="text-sm leading-6 text-slate-800">
+                  <b className="font-bold">Ainda reunindo dados sobre Folha de Pagamento.</b> Faltam lançamentos confirmados pra um diagnóstico confiável.
+                </p>
+              </div>
+              <p className="mt-3 border-t border-slate-100 pt-3 text-[11px] text-slate-400">Sem confiança suficiente pra opinar ainda</p>
             </div>
 
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
@@ -208,6 +222,7 @@ export default function Home() {
               <span className="inline-flex items-center gap-2"><Cloud size={16} className="text-purple-500" /> 100% em nuvem</span>
               <span className="inline-flex items-center gap-2"><ShieldCheck size={16} className="text-purple-500" /> Diagnóstico honesto</span>
               <span className="inline-flex items-center gap-2"><Database size={16} className="text-purple-500" /> Tudo conectado</span>
+              <span className="inline-flex items-center gap-2"><Compass size={16} className="text-purple-500" /> Copiloto, não piloto automático</span>
             </div>
           </motion.div>
 
@@ -244,7 +259,7 @@ export default function Home() {
       <section id="produto" className="bg-slate-50 px-6 py-24">
         <SectionTitle eyebrow="Plataforma" title="Tudo conectado em tempo real." subtitle="A Nuvix une os módulos essenciais da operação para transformar dados em gestão." />
         <MiniDashboard />
-        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-slate-400">Tela ilustrativa, com dados de exemplo — na Nuvix de verdade, os números são sempre os seus.</p>
+        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-slate-400">Tela ilustrativa, com dados de exemplo. Na Nuvix de verdade, os números são sempre os seus.</p>
       </section>
 
       <section id="modulos" className="px-6 py-24">
