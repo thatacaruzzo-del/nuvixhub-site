@@ -82,9 +82,9 @@ function Logo() {
 }
 
 const modules = [
-  ["Dashboard Executivo", "Indicadores em tempo real para decisões mais rápidas.", BarChart3],
+  ["Painel Executivo", "Indicadores em tempo real para decisões mais rápidas.", BarChart3],
   ["Financeiro", "Receitas, despesas, fluxo de caixa e controle completo.", DollarSign],
-  ["CRM", "Clientes, oportunidades e relacionamento comercial integrados.", Users],
+  ["Comercial", "Clientes, oportunidades e relacionamento comercial integrados.", Users],
   ["Ordens de Serviço", "Cadastro, status, prioridades e acompanhamento operacional.", ClipboardList],
   ["Serviços", "Organização dos serviços prestados e rotinas da operação.", Wrench],
   ["Materiais", "Controle de materiais vinculados à operação.", Package],
@@ -106,7 +106,7 @@ function MiniDashboard() {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-purple-200">Boa tarde · Nuvix</p>
-            <h3 className="mt-3 text-3xl font-black">Dashboard Executivo</h3>
+            <h3 className="mt-3 text-3xl font-black">Painel Executivo</h3>
             <p className="mt-2 text-purple-100">Prestação de Serviço · Visão geral</p>
           </div>
           <div className="float rounded-3xl bg-white/20 px-5 py-4 backdrop-blur">
@@ -163,7 +163,7 @@ export default function Home() {
           </nav>
           <div className="flex items-center gap-3">
             <a href="https://nuvix-os-v2.vercel.app" className="hidden rounded-2xl border border-slate-200 px-5 py-3 text-sm font-bold text-slate-700 hover:border-purple-300 md:inline-flex">
-              Login
+              Entrar
             </a>
             <a href={contactLink} className="rounded-2xl bg-purple-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-purple-200 hover:bg-purple-700">
               Demonstração
@@ -235,7 +235,7 @@ export default function Home() {
             </div>
             <div className="absolute bottom-8 right-4 float-delay rounded-3xl border border-purple-100 bg-white/90 p-4 shadow-soft backdrop-blur">
               <p className="text-sm font-black text-slate-950">Operação conectada</p>
-              <p className="text-xs text-slate-500">CRM → OS → Financeiro</p>
+              <p className="text-xs text-slate-500">Comercial → OS → Financeiro</p>
             </div>
           </div>
         </div>
@@ -285,7 +285,7 @@ export default function Home() {
               Do cliente ao financeiro, sem perder informação no caminho.
             </h2>
             <p className="mt-6 text-lg leading-8 text-slate-600">
-              A Nuvix conecta CRM, Ordens de Serviço, materiais, financeiro, RH e relatórios para que a gestão tenha clareza do que está acontecendo.
+              A Nuvix conecta Comercial, Ordens de Serviço, materiais, financeiro, RH e relatórios para que a gestão tenha clareza do que está acontecendo.
             </p>
             <div className="mt-8 grid gap-4">
               {["Cliente cadastrado", "Ordem de Serviço criada", "Materiais vinculados", "Financeiro atualizado", "Indicadores em tempo real"].map((step) => (
@@ -298,7 +298,7 @@ export default function Home() {
           </div>
           <div className="rounded-[36px] border border-purple-100 bg-white p-6 shadow-soft">
             <div className="rounded-[28px] bg-slate-50 p-6">
-              {["CRM", "Ordens de Serviço", "Materiais", "Financeiro", "Dashboard"].map((item, i) => (
+              {["Comercial", "Ordens de Serviço", "Materiais", "Financeiro", "Painel"].map((item, i) => (
                 <div key={item} className="relative mb-5 flex items-center gap-4 last:mb-0">
                   <div className="grid h-12 w-12 place-items-center rounded-2xl bg-purple-600 font-black text-white">{i + 1}</div>
                   <div className="flex-1 rounded-2xl bg-white p-4 font-black text-slate-900 shadow-sm">{item}</div>
@@ -316,7 +316,7 @@ export default function Home() {
             ["Centralização", "Um único sistema para dados, rotinas, aprovações e gestão."],
             ["Controle operacional", "Acompanhe prazos, ordens e execução em tempo real."],
             ["Gestão financeira", "Conecte contas, clientes, custos e previsões à operação."],
-            ["CRM integrado", "O relacionamento comercial conversa com entregas e faturamento."],
+            ["Comercial integrado", "O relacionamento comercial conversa com entregas e faturamento."],
             ["Indicadores", "KPIs executivos sempre atualizados para decisões rápidas."],
             ["Relatórios", "Análises consistentes para rotina, auditoria e diretoria."],
           ].map(([title, desc]) => (
@@ -362,7 +362,7 @@ export default function Home() {
             <p className="font-black text-slate-950">Empresa</p>
             <div className="mt-4 grid gap-3 text-slate-600">
               <a href={contactLink}>Contato</a>
-              <a href="https://nuvix-os-v2.vercel.app">Login da Plataforma</a>
+              <a href="https://nuvix-os-v2.vercel.app">Entrar na Plataforma</a>
             </div>
           </div>
           <div>
