@@ -366,10 +366,17 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <p className="font-black text-slate-950">Contato</p>
-            <p className="mt-4 text-slate-600">nuvixhub@outlook.com</p>
-            <p className="mt-8 text-sm text-slate-400">© 2026 Nuvix Hub. Todos os direitos reservados.</p>
+            <p className="font-black text-slate-950">Legal</p>
+            <div className="mt-4 grid gap-3 text-slate-600">
+              <a href="/termos">Termos de Uso</a>
+              <a href="/privacidade">Política de Privacidade</a>
+            </div>
+            <p className="mt-8 text-slate-600">nuvixhub@outlook.com</p>
           </div>
+        </div>
+        <div className="mx-auto mt-10 max-w-7xl border-t border-slate-100 pt-6 text-sm text-slate-400">
+          <p>Nuvix Hub · CNPJ 56.948.429/0001-60</p>
+          <p className="mt-1">© 2026 Nuvix Hub. Todos os direitos reservados.</p>
         </div>
       </footer>
     </main>
