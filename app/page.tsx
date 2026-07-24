@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Float, OrbitControls, RoundedBox, Sphere } from "@react-three/drei";
 import { motion } from "framer-motion";
@@ -7,7 +8,7 @@ import Image from "next/image";
 import {
   BarChart3, BriefcaseBusiness, CheckCircle2, ClipboardList, Cloud, Cog, Compass, Database,
   DollarSign, FileText, Layers3, Mail, Package, ShieldCheck, Users,
-  Wrench, ArrowRight
+  Wrench, ArrowRight, Check
 } from "lucide-react";
 
 const contactLink = "https://tally.so/r/Bz5ERA";
@@ -99,42 +100,51 @@ const pains = [
   ["Informações descentralizadas", "Dados importantes ficam presos em departamentos e conversas."],
 ];
 
-function MiniDashboard() {
+const productShots = [
+  ["Painel", "/produto/painel.jpg", "Indicadores em tempo real e o resumo do dia, pra decisão rápida sem abrir seis telas."],
+  ["Financeiro", "/produto/financeiro.jpg", "Receitas, despesas e fluxo de caixa com filtro por período, sem depender de planilha paralela."],
+  ["Ordens de Serviço", "/produto/ordens-de-servico.jpg", "Cadastro, status e prioridade de cada ordem de serviço, do agendamento até a conclusão."],
+  ["Comercial", "/produto/comercial.jpg", "Clientes, oportunidades e relacionamento comercial integrados ao resto da operação."],
+  ["RH", "/produto/rh.jpg", "Colaboradores, ponto e folha, com acesso restrito por permissão, inclusive autoatendimento de ponto pra equipe operacional."],
+  ["Relatórios", "/produto/relatorios.jpg", "Análises consistentes pra rotina, auditoria e diretoria, puxadas do mesmo dado que já está no sistema."],
+] as const;
+
+function ProductTour() {
+  const [active, setActive] = useState(0);
   return (
-    <div className="relative mx-auto w-full max-w-3xl rounded-[32px] border border-purple-100 bg-white p-4 shadow-soft">
-      <div className="rounded-[24px] bg-gradient-to-br from-[#240B55] to-[#8845F4] p-7 text-white">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-purple-200">Boa tarde · Nuvix</p>
-            <h3 className="mt-3 text-3xl font-black">Painel Executivo</h3>
-            <p className="mt-2 text-purple-100">Prestação de Serviço · Visão geral</p>
-          </div>
-          <div className="float rounded-3xl bg-white/20 px-5 py-4 backdrop-blur">
-            <Cloud size={22} />
-          </div>
-        </div>
-        <div className="mt-8 grid grid-cols-3 gap-4">
-          {[
-            ["Caixa disponível", "R$ 12.400"],
-            ["Clientes ativos", "18"],
-            ["OS abertas", "6"],
-          ].map(([lbl, val]) => (
-            <div key={lbl} className="rounded-2xl bg-white/14 p-4 backdrop-blur">
-              <p className="text-sm font-bold">{val}</p>
-              <p className="mt-1 text-xs text-purple-100">{lbl}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="grid gap-4 p-5 md:grid-cols-3">
-        {["Financeiro", "Ordens de Serviço", "Relatórios"].map((label, i) => (
-          <div key={label} className="rounded-2xl border border-slate-100 bg-slate-50 p-5">
-            <div className="mb-4 h-3 w-20 rounded-full bg-purple-200" />
-            <p className="font-bold text-slate-950">{label}</p>
-            <div className="mt-5 h-16 rounded-2xl bg-gradient-to-r from-purple-500 to-violet-400 opacity-80" />
-          </div>
+    <div className="mx-auto w-full max-w-4xl">
+      <div className="flex flex-wrap justify-center gap-2">
+        {productShots.map(([label], i) => (
+          <button
+            key={label}
+            onClick={() => setActive(i)}
+            className={`rounded-full border px-4 py-2 text-sm font-bold transition-colors ${
+              active === i
+                ? "border-purple-600 bg-purple-600 text-white"
+                : "border-slate-200 bg-white text-slate-600 hover:border-purple-300"
+            }`}
+          >
+            {label}
+          </button>
         ))}
       </div>
+      <div className="relative mt-6 overflow-hidden rounded-[28px] border border-purple-100 bg-white shadow-soft">
+        <div className="flex items-center gap-1.5 border-b border-slate-100 bg-slate-50 px-4 py-3">
+          <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
+          <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
+          <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
+        </div>
+        <Image
+          src={productShots[active][1]}
+          alt={`Tela real de ${productShots[active][0]} no sistema Nuvix`}
+          width={1600}
+          height={680}
+          className="w-full"
+        />
+      </div>
+      <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-6 text-slate-500">
+        {productShots[active][2]}
+      </p>
     </div>
   );
 }
@@ -158,6 +168,7 @@ export default function Home() {
           <nav className="hidden items-center gap-8 text-sm font-semibold text-slate-600 md:flex">
             <a href="#produto" className="hover:text-purple-600">Produto</a>
             <a href="#modulos" className="hover:text-purple-600">Módulos</a>
+            <a href="#precos" className="hover:text-purple-600">Preços</a>
             <a href="#solucoes" className="hover:text-purple-600">Soluções</a>
             <a href="#contato" className="hover:text-purple-600">Contato</a>
           </nav>
@@ -220,9 +231,10 @@ export default function Home() {
             </div>
             <div className="mt-8 flex flex-wrap gap-5 text-sm font-bold text-slate-500">
               <span className="inline-flex items-center gap-2"><Cloud size={16} className="text-purple-500" /> 100% em nuvem</span>
-              <span className="inline-flex items-center gap-2"><ShieldCheck size={16} className="text-purple-500" /> Diagnóstico honesto</span>
+              <span className="inline-flex items-center gap-2"><Layers3 size={16} className="text-purple-500" /> Diagnóstico honesto</span>
               <span className="inline-flex items-center gap-2"><Database size={16} className="text-purple-500" /> Tudo conectado</span>
               <span className="inline-flex items-center gap-2"><Compass size={16} className="text-purple-500" /> Copiloto, não piloto automático</span>
+              <span className="inline-flex items-center gap-2"><ShieldCheck size={16} className="text-purple-500" /> Isolamento de dados por empresa</span>
             </div>
           </motion.div>
 
@@ -257,9 +269,9 @@ export default function Home() {
       </section>
 
       <section id="produto" className="bg-slate-50 px-6 py-24">
-        <SectionTitle eyebrow="Plataforma" title="Tudo conectado em tempo real." subtitle="A Nuvix une os módulos essenciais da operação para transformar dados em gestão." />
-        <MiniDashboard />
-        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-slate-400">Tela ilustrativa, com dados de exemplo. Na Nuvix de verdade, os números são sempre os seus.</p>
+        <SectionTitle eyebrow="Plataforma" title="Isso não é ilustração. É o produto." subtitle="Seis áreas, um sistema só. Clique e veja a tela real de cada uma." />
+        <ProductTour />
+        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-slate-400">Telas reais do sistema, com dados de exemplo. Na Nuvix de verdade, os números são sempre os seus.</p>
       </section>
 
       <section id="modulos" className="px-6 py-24">
@@ -275,6 +287,63 @@ export default function Home() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section id="precos" className="bg-slate-50 px-6 py-24">
+        <SectionTitle eyebrow="Preço" title="Sem letra miúda." subtitle="Três planos, liberação progressiva de módulo. Todo plano começa com um período de teste grátis." />
+        <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
+          {[
+            {
+              nome: "Start",
+              preco: "R$ 99,90",
+              destaque: false,
+              itens: ["Painel executivo", "Financeiro completo", "Contas a pagar e a receber", "Usuários, relatórios e configurações"],
+            },
+            {
+              nome: "Pro",
+              preco: "R$ 199,90",
+              destaque: true,
+              itens: ["Tudo do Start", "Transporte e cotação de frete", "Comercial (CRM) completo"],
+            },
+            {
+              nome: "Plus",
+              preco: "R$ 299,90",
+              destaque: false,
+              itens: ["Tudo do Pro", "RH completo, ponto e folha", "Inteligência Nuvix"],
+            },
+          ].map((plano) => (
+            <div
+              key={plano.nome}
+              className={`rounded-[28px] border bg-white p-8 shadow-sm ${
+                plano.destaque ? "border-purple-300 shadow-lg shadow-purple-100" : "border-slate-100"
+              }`}
+            >
+              <p className="text-sm font-black uppercase tracking-[0.2em] text-purple-500">{plano.nome}</p>
+              <p className="mt-3 text-3xl font-black text-slate-950">
+                {plano.preco} <span className="text-base font-bold text-slate-400">/ mês</span>
+              </p>
+              <div className="mt-6 grid gap-3">
+                {plano.itens.map((item) => (
+                  <div key={item} className="flex items-start gap-2 text-sm text-slate-600">
+                    <Check size={16} className="mt-0.5 flex-shrink-0 text-purple-600" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+              <a
+                href={contactLink}
+                className={`mt-7 flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-black ${
+                  plano.destaque ? "bg-purple-600 text-white hover:bg-purple-700" : "border border-slate-200 text-slate-800 hover:border-purple-300"
+                }`}
+              >
+                Começar grátis
+              </a>
+            </div>
+          ))}
+        </div>
+        <p className="mx-auto mt-6 max-w-2xl text-center text-xs text-slate-400">
+          Ordens de Serviço, Serviços e Materiais entram conforme o segmento contratado (Prestação de Serviço, Transporte ou Mista), separado do plano acima.
+        </p>
       </section>
 
       <section id="solucoes" className="bg-gradient-to-b from-white to-purple-50 px-6 py-24">
@@ -355,6 +424,7 @@ export default function Home() {
             <div className="mt-4 grid gap-3 text-slate-600">
               <a href="#produto">Plataforma</a>
               <a href="#modulos">Módulos</a>
+              <a href="#precos">Preços</a>
               <a href="#solucoes">Soluções</a>
             </div>
           </div>
