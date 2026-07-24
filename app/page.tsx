@@ -8,7 +8,7 @@ import Image from "next/image";
 import {
   BarChart3, BriefcaseBusiness, CheckCircle2, ClipboardList, Cloud, Cog, Compass, Database,
   DollarSign, FileText, Layers3, Mail, Package, ShieldCheck, Users,
-  Wrench, ArrowRight, Check
+  Wrench, ArrowRight, Check, Menu, X
 } from "lucide-react";
 
 const contactLink = "https://tally.so/r/Bz5ERA";
@@ -160,17 +160,24 @@ function SectionTitle({ eyebrow, title, subtitle }: { eyebrow: string; title: st
 }
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navLinks = [
+    ["#produto", "Produto"],
+    ["#modulos", "Módulos"],
+    ["#precos", "Preços"],
+    ["#solucoes", "Soluções"],
+    ["#contato", "Contato"],
+  ] as const;
+
   return (
     <main className="overflow-hidden bg-white">
       <header className="fixed left-0 right-0 top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Logo />
           <nav className="hidden items-center gap-8 text-sm font-semibold text-slate-600 md:flex">
-            <a href="#produto" className="hover:text-purple-600">Produto</a>
-            <a href="#modulos" className="hover:text-purple-600">Módulos</a>
-            <a href="#precos" className="hover:text-purple-600">Preços</a>
-            <a href="#solucoes" className="hover:text-purple-600">Soluções</a>
-            <a href="#contato" className="hover:text-purple-600">Contato</a>
+            {navLinks.map(([href, label]) => (
+              <a key={href} href={href} className="hover:text-purple-600">{label}</a>
+            ))}
           </nav>
           <div className="flex items-center gap-3">
             <a href="https://nuvix-os-v2.vercel.app" className="hidden rounded-2xl border border-slate-200 px-5 py-3 text-sm font-bold text-slate-700 hover:border-purple-300 md:inline-flex">
@@ -179,8 +186,41 @@ export default function Home() {
             <a href={contactLink} className="rounded-2xl bg-purple-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-purple-200 hover:bg-purple-700">
               Demonstração
             </a>
+            <button
+              type="button"
+              aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((v) => !v)}
+              className="grid h-11 w-11 place-items-center rounded-2xl border border-slate-200 text-slate-700 md:hidden"
+            >
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
+
+        {menuOpen && (
+          <nav className="border-t border-slate-100 bg-white px-6 py-4 md:hidden">
+            <div className="flex flex-col gap-1 text-base font-semibold text-slate-700">
+              {navLinks.map(([href, label]) => (
+                <a
+                  key={href}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-xl px-3 py-3 hover:bg-purple-50 hover:text-purple-600"
+                >
+                  {label}
+                </a>
+              ))}
+              <a
+                href="https://nuvix-os-v2.vercel.app"
+                onClick={() => setMenuOpen(false)}
+                className="rounded-xl px-3 py-3 hover:bg-purple-50 hover:text-purple-600"
+              >
+                Entrar na plataforma
+              </a>
+            </div>
+          </nav>
+        )}
       </header>
 
       <section className="noise pt-32">
