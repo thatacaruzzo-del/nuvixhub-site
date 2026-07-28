@@ -143,8 +143,8 @@ export default function Termos() {
           <h2 className="text-lg font-black text-slate-950">12. Contato</h2>
           <p className="mt-3">
             Dúvidas sobre estes termos podem ser enviadas para{" "}
-            <a href="mailto:nuvixhub@outlook.com" className="font-semibold text-purple-700">
-              nuvixhub@outlook.com
+            <a href="mailto:thamirescaruzzo@nuvixhub.com.br" className="font-semibold text-purple-700">
+              thamirescaruzzo@nuvixhub.com.br
             </a>
             .
           </p>

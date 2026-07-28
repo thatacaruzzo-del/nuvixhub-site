@@ -133,8 +133,8 @@ export default function Privacidade() {
             O Encarregado pelo Tratamento de Dados Pessoais (DPO), nos termos do art. 41 da LGPD,
             é <strong className="text-slate-950">Thiago de Almeida Caruzzo</strong>. Dúvidas ou
             solicitações sobre seus dados podem ser enviadas para{" "}
-            <a href="mailto:nuvixhub@outlook.com" className="font-semibold text-purple-700">
-              nuvixhub@outlook.com
+            <a href="mailto:thamirescaruzzo@nuvixhub.com.br" className="font-semibold text-purple-700">
+              thamirescaruzzo@nuvixhub.com.br
             </a>
             .
           </p>

@@ -481,7 +481,7 @@ export default function Home() {
               <a href="/termos">Termos de Uso</a>
               <a href="/privacidade">Política de Privacidade</a>
             </div>
-            <p className="mt-8 text-slate-600">nuvixhub@outlook.com</p>
+            <p className="mt-8 text-slate-600">thamirescaruzzo@nuvixhub.com.br</p>
           </div>
         </div>
         <div className="mx-auto mt-10 max-w-7xl border-t border-slate-100 pt-6 text-sm text-slate-400">
