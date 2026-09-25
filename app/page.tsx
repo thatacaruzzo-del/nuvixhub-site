@@ -553,34 +553,22 @@ export default function Home() {
             Prestação de serviço
           </button>
         </div>
-        <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-2 md:items-center">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.28em] text-purple-500">{fluxos[fluxoAtivo].eyebrow}</p>
-            <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 md:text-5xl">
-              {fluxos[fluxoAtivo].title}
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-slate-600">
-              {fluxos[fluxoAtivo].desc}
-            </p>
-            <div className="mt-8 grid gap-4">
-              {fluxos[fluxoAtivo].passos.map((step) => (
-                <div key={step} className="flex items-center gap-4 rounded-2xl border border-purple-100 bg-white p-4 shadow-sm">
-                  <CheckCircle2 className="text-purple-600" />
-                  <span className="font-bold text-slate-800">{step}</span>
-                </div>
-              ))}
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-black uppercase tracking-[0.28em] text-purple-500">{fluxos[fluxoAtivo].eyebrow}</p>
+          <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 md:text-5xl">
+            {fluxos[fluxoAtivo].title}
+          </h2>
+          <p className="mt-6 text-lg leading-8 text-slate-600">
+            {fluxos[fluxoAtivo].desc}
+          </p>
+        </div>
+        <div className="mx-auto mt-10 grid max-w-2xl gap-4">
+          {fluxos[fluxoAtivo].passos.map((step, i) => (
+            <div key={step} className="flex items-center gap-4 rounded-2xl border border-purple-100 bg-white p-4 shadow-sm">
+              <div className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-full bg-purple-600 text-sm font-black text-white">{i + 1}</div>
+              <span className="font-bold text-slate-800">{step}</span>
             </div>
-          </div>
-          <div className="rounded-[36px] border border-purple-100 bg-white p-6 shadow-soft">
-            <div className="rounded-[28px] bg-slate-50 p-6">
-              {fluxos[fluxoAtivo].passos.map((item, i) => (
-                <div key={item} className="relative mb-5 flex items-center gap-4 last:mb-0">
-                  <div className="grid h-12 w-12 flex-shrink-0 place-items-center rounded-2xl bg-purple-600 font-black text-white">{i + 1}</div>
-                  <div className="flex-1 rounded-2xl bg-white p-4 font-black text-slate-900 shadow-sm">{item}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
