@@ -10,6 +10,7 @@ import {
   DollarSign, FileText, Layers3, Mail, Package, ShieldCheck, Users,
   Wrench, ArrowRight, Menu, X, CreditCard, Share2, Sparkles, Brain, PlugZap, ScanSearch, ListChecks
 } from "lucide-react";
+import { OPEN_COOKIE_PREFS_EVENT } from "./components/CookieConsent";
 
 function WhatsAppIcon({ size = 22 }: { size?: number }) {
   return (
@@ -685,6 +686,12 @@ export default function Home() {
             <div className="mt-5 grid gap-2 text-sm text-slate-500">
               <a href="/termos">Termos de Uso</a>
               <a href="/privacidade">Política de Privacidade</a>
+              <button
+                onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_PREFS_EVENT))}
+                className="text-left hover:text-purple-600"
+              >
+                Preferências de cookies
+              </button>
             </div>
           </div>
         </div>

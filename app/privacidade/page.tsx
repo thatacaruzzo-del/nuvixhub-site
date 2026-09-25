@@ -31,7 +31,7 @@ export default function Privacidade() {
       </div>
 
       <h1 className="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Política de Privacidade</h1>
-      <p className="mt-3 text-sm text-slate-500">Última atualização: julho de 2026</p>
+      <p className="mt-3 text-sm text-slate-500">Última atualização: setembro de 2026</p>
 
       <div className="mt-10 space-y-10 leading-7 text-slate-700">
         <section>
@@ -49,7 +49,12 @@ export default function Privacidade() {
           <ul className="mt-3 list-disc space-y-2 pl-5">
             <li>Dados de cadastro: nome, e-mail e empresa dos usuários que acessam o sistema.</li>
             <li>Dados de uso: páginas acessadas, ações realizadas e horários de acesso, usados para segurança e para os indicadores do painel.</li>
-            <li>Dados de navegação do site institucional, coletados de forma agregada e anônima via Vercel Analytics.</li>
+            <li>Dados de navegação do site institucional, coletados de forma agregada e anônima via Vercel Analytics — isso roda sempre, não depende do banner de cookies, porque não identifica ninguém.</li>
+            <li>
+              Cookies de publicidade (Google Ads e Meta/Facebook Ads): só são usados se você autorizar no banner de
+              cookies do site institucional, para medir o resultado das nossas campanhas publicitárias. Você pode
+              recusar ou mudar de ideia a qualquer momento em &quot;Preferências de cookies&quot;, no rodapé do site.
+            </li>
           </ul>
           <p className="mt-3">
             Esta política não cobre os dados que a empresa contratante insere na plataforma sobre
@@ -82,11 +87,23 @@ export default function Privacidade() {
           <ul className="mt-3 list-disc space-y-2 pl-5">
             <li>Supabase — armazenamento do banco de dados e autenticação.</li>
             <li>Vercel — hospedagem do site e da plataforma.</li>
+            <li>Google Ads e Meta (Facebook/Instagram Ads) — apenas se você autorizar os cookies de publicidade no site institucional, para medir o resultado das nossas campanhas.</li>
           </ul>
         </section>
 
         <section>
-          <h2 className="text-lg font-black text-slate-950">5. Segurança e isolamento dos dados</h2>
+          <h2 className="text-lg font-black text-slate-950">5. Transferência internacional de dados</h2>
+          <p className="mt-3">
+            Os fornecedores acima operam com infraestrutura internacional — o banco de dados da Nuvix Hub, por
+            exemplo, fica hospedado nos Estados Unidos. Isso significa que seus dados podem ser processados fora
+            do Brasil, sempre por fornecedores que adotam padrões reconhecidos de segurança da informação, nos
+            termos do art. 33 da LGPD. Nunca compartilhamos dados pessoais com terceiros para fins de
+            comercialização.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-black text-slate-950">6. Segurança e isolamento dos dados</h2>
           <p className="mt-3">
             Cada empresa cliente só tem acesso aos próprios dados, isolados por controles de
             acesso no banco de dados que impedem que uma empresa visualize informações de outra.
@@ -95,7 +112,7 @@ export default function Privacidade() {
         </section>
 
         <section>
-          <h2 className="text-lg font-black text-slate-950">6. Por quanto tempo guardamos os dados</h2>
+          <h2 className="text-lg font-black text-slate-950">7. Por quanto tempo guardamos os dados</h2>
           <p className="mt-3">
             Os dados são mantidos enquanto durar a relação contratual com a empresa cliente. Após
             o encerramento, os dados podem ser mantidos pelo prazo exigido por obrigação legal ou
@@ -104,7 +121,7 @@ export default function Privacidade() {
         </section>
 
         <section>
-          <h2 className="text-lg font-black text-slate-950">7. Seus direitos</h2>
+          <h2 className="text-lg font-black text-slate-950">8. Seus direitos</h2>
           <p className="mt-3">Nos termos da LGPD, o titular dos dados pode solicitar, a qualquer momento:</p>
           <ul className="mt-3 list-disc space-y-2 pl-5">
             <li>Confirmação de que seus dados são tratados e acesso a eles.</li>
@@ -120,7 +137,7 @@ export default function Privacidade() {
         </section>
 
         <section>
-          <h2 className="text-lg font-black text-slate-950">8. Alterações nesta política</h2>
+          <h2 className="text-lg font-black text-slate-950">9. Alterações nesta política</h2>
           <p className="mt-3">
             Esta política pode ser atualizada para refletir mudanças no serviço ou na legislação.
             A data da última atualização está sempre indicada no topo desta página.
@@ -128,7 +145,7 @@ export default function Privacidade() {
         </section>
 
         <section>
-          <h2 className="text-lg font-black text-slate-950">9. Encarregado de Dados (DPO)</h2>
+          <h2 className="text-lg font-black text-slate-950">10. Encarregado de Dados (DPO)</h2>
           <p className="mt-3">
             O Encarregado pelo Tratamento de Dados Pessoais (DPO), nos termos do art. 41 da LGPD,
             é <strong className="text-slate-950">Thiago de Almeida Caruzzo</strong>. Dúvidas ou
