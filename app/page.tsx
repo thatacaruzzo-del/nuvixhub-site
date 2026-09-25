@@ -218,12 +218,12 @@ const fluxos = {
   },
 } as const;
 
-function SectionTitle({ eyebrow, title, subtitle }: { eyebrow: string; title: string; subtitle: string }) {
+function SectionTitle({ eyebrow, title, subtitle, dark }: { eyebrow: string; title: string; subtitle: string; dark?: boolean }) {
   return (
     <div className="mx-auto mb-12 max-w-3xl text-center">
-      <p className="text-sm font-black uppercase tracking-[0.28em] text-purple-500">{eyebrow}</p>
-      <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 md:text-5xl">{title}</h2>
-      <p className="mt-5 text-lg leading-8 text-slate-600">{subtitle}</p>
+      <p className={`text-sm font-black uppercase tracking-[0.28em] ${dark ? "text-purple-400" : "text-purple-500"}`}>{eyebrow}</p>
+      <h2 className={`mt-4 text-4xl font-black tracking-tight md:text-5xl ${dark ? "text-white" : "text-slate-950"}`}>{title}</h2>
+      <p className={`mt-5 text-lg leading-8 ${dark ? "text-slate-300" : "text-slate-600"}`}>{subtitle}</p>
     </div>
   );
 }
@@ -442,7 +442,7 @@ export default function Home() {
       </section>
 
       <section id="inteligencia" className="bg-[#1b0b3a] px-6 py-24">
-        <SectionTitle eyebrow="Inteligência Nuvix" title="Sua operação avisa antes de virar problema." subtitle="A Nuvix olha os dados que você já confirma todo dia (financeiro, comercial, operação, estoque e RH) e aponta o que precisa de atenção, com o motivo e o nível de confiança. Sem achismo, sem número inventado." />
+        <SectionTitle dark eyebrow="Inteligência Nuvix" title="Sua operação avisa antes de virar problema." subtitle="A Nuvix olha os dados que você já confirma todo dia (financeiro, comercial, operação, estoque e RH) e aponta o que precisa de atenção, com o motivo e o nível de confiança. Sem achismo, sem número inventado." />
         <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 md:items-center">
           <div className="grid gap-4">
             {[
@@ -604,7 +604,7 @@ export default function Home() {
       </section>
 
       <section className="bg-[#1b0b3a] px-6 py-24">
-        <SectionTitle eyebrow="Prova social" title="Não é promessa, é operação rodando." subtitle="Isso não é uma projeção de vendas. É o que já acontece hoje, com dinheiro e nota fiscal de cliente de verdade." />
+        <SectionTitle dark eyebrow="Prova social" title="Não é promessa, é operação rodando." subtitle="Isso não é uma projeção de vendas. É o que já acontece hoje, com dinheiro e nota fiscal de cliente de verdade." />
         <div className="mx-auto mb-14 flex max-w-4xl flex-wrap items-center justify-center gap-x-10 gap-y-4">
           {["Caruzzo Express", "CZ Sunglass", "Yup Presentes Criativos"].map((nome) => (
             <span key={nome} className="text-lg font-black tracking-tight text-white/70">{nome}</span>
