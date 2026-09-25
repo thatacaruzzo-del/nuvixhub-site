@@ -200,6 +200,24 @@ const plans = [
   },
 ] as const;
 
+// A imagem antiga só mostrava o fluxo de serviço (Comercial → OS → Materiais).
+// Hoje o cliente mais maduro da Nuvix é de venda de produto, então o fluxo
+// precisa mostrar as duas pontas: quem presta serviço e quem vende produto.
+const fluxos = {
+  servico: {
+    eyebrow: "Fluxo de serviço",
+    title: "Do cliente ao financeiro, sem perder informação no caminho.",
+    desc: "A Nuvix conecta Comercial, Ordens de Serviço, materiais, financeiro, RH e relatórios para que a gestão tenha clareza do que está acontecendo.",
+    passos: ["Cliente cadastrado", "Ordem de Serviço criada", "Materiais vinculados", "Financeiro atualizado", "Indicadores em tempo real"],
+  },
+  venda: {
+    eyebrow: "Fluxo de vendas",
+    title: "Da venda ao financeiro, sem digitar duas vezes.",
+    desc: "Seja no PDV ou no Mercado Livre, Nuvemshop, Shopee e PedidoOK, a venda já nasce conectada: estoque, nota fiscal e financeiro atualizam sozinhos.",
+    passos: ["Venda no PDV ou marketplace", "Estoque baixa sozinho", "Nota fiscal emitida (NFC-e/NF-e)", "Financeiro atualizado", "Indicadores em tempo real"],
+  },
+} as const;
+
 function SectionTitle({ eyebrow, title, subtitle }: { eyebrow: string; title: string; subtitle: string }) {
   return (
     <div className="mx-auto mb-12 max-w-3xl text-center">
@@ -212,6 +230,7 @@ function SectionTitle({ eyebrow, title, subtitle }: { eyebrow: string; title: st
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [fluxoAtivo, setFluxoAtivo] = useState<"servico" | "venda">("venda");
   const navLinks = [
     ["#produto", "Produto"],
     ["#modulos", "Módulos"],
@@ -520,17 +539,31 @@ export default function Home() {
       </section>
 
       <section id="solucoes" className="bg-gradient-to-b from-white to-purple-50 px-6 py-24">
+        <div className="mx-auto mb-10 flex max-w-7xl justify-center gap-2">
+          <button
+            onClick={() => setFluxoAtivo("venda")}
+            className={`rounded-full border px-5 py-2.5 text-sm font-bold transition-colors ${fluxoAtivo === "venda" ? "border-purple-600 bg-purple-600 text-white" : "border-slate-200 bg-white text-slate-600 hover:border-purple-300"}`}
+          >
+            Venda de produto
+          </button>
+          <button
+            onClick={() => setFluxoAtivo("servico")}
+            className={`rounded-full border px-5 py-2.5 text-sm font-bold transition-colors ${fluxoAtivo === "servico" ? "border-purple-600 bg-purple-600 text-white" : "border-slate-200 bg-white text-slate-600 hover:border-purple-300"}`}
+          >
+            Prestação de serviço
+          </button>
+        </div>
         <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-2 md:items-center">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.28em] text-purple-500">Fluxo operacional</p>
+            <p className="text-sm font-black uppercase tracking-[0.28em] text-purple-500">{fluxos[fluxoAtivo].eyebrow}</p>
             <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 md:text-5xl">
-              Do cliente ao financeiro, sem perder informação no caminho.
+              {fluxos[fluxoAtivo].title}
             </h2>
             <p className="mt-6 text-lg leading-8 text-slate-600">
-              A Nuvix conecta Comercial, Ordens de Serviço, materiais, financeiro, RH e relatórios para que a gestão tenha clareza do que está acontecendo.
+              {fluxos[fluxoAtivo].desc}
             </p>
             <div className="mt-8 grid gap-4">
-              {["Cliente cadastrado", "Ordem de Serviço criada", "Materiais vinculados", "Financeiro atualizado", "Indicadores em tempo real"].map((step) => (
+              {fluxos[fluxoAtivo].passos.map((step) => (
                 <div key={step} className="flex items-center gap-4 rounded-2xl border border-purple-100 bg-white p-4 shadow-sm">
                   <CheckCircle2 className="text-purple-600" />
                   <span className="font-bold text-slate-800">{step}</span>
@@ -540,9 +573,9 @@ export default function Home() {
           </div>
           <div className="rounded-[36px] border border-purple-100 bg-white p-6 shadow-soft">
             <div className="rounded-[28px] bg-slate-50 p-6">
-              {["Comercial", "Ordens de Serviço", "Materiais", "Financeiro", "Painel"].map((item, i) => (
+              {fluxos[fluxoAtivo].passos.map((item, i) => (
                 <div key={item} className="relative mb-5 flex items-center gap-4 last:mb-0">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-purple-600 font-black text-white">{i + 1}</div>
+                  <div className="grid h-12 w-12 flex-shrink-0 place-items-center rounded-2xl bg-purple-600 font-black text-white">{i + 1}</div>
                   <div className="flex-1 rounded-2xl bg-white p-4 font-black text-slate-900 shadow-sm">{item}</div>
                 </div>
               ))}
