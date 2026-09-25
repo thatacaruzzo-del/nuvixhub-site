@@ -7,10 +7,39 @@ import Image from "next/image";
 import {
   BarChart3, BriefcaseBusiness, CheckCircle2, ClipboardList, Cloud, Cog, Database,
   DollarSign, FileText, Layers3, Mail, Package, ShieldCheck, Users,
-  Wrench, ArrowRight
+  Wrench, ArrowRight, CreditCard, Share2, Sparkles
 } from "lucide-react";
 
 const contactLink = "https://tally.so/r/Bz5ERA";
+
+// Quem já vende produto (loja física, e-commerce ou os dois) não usa OS/Serviços —
+// usa PDV, estoque e nota fiscal. Essa seção existia como gap real: o site falava só
+// de "negócio de serviço" enquanto os clientes reais mais maduros da Nuvix hoje são
+// de venda de produto (varejo com PDV, NFC-e e marketplace).
+const varejo = [
+  ["Caixa / PDV", "Venda rápida, desconto por item com aprovação, kits e combos, e emissão de NFC-e direto na venda.", CreditCard],
+  ["Estoque em tempo real", "Múltiplas lojas, validade, lote e consignado. O estoque baixa sozinho a cada venda, em qualquer canal.", Package],
+  ["Nota fiscal automática", "NFC-e e NF-e emitidas direto pra SEFAZ a cada venda, sem planilha, sem esquecer e sem depender de terceiro.", FileText],
+  ["Marketplace conectado", "Mercado Livre, Nuvemshop, Shopee e PedidoOK sincronizados de verdade. Vendeu lá, baixa aqui, sem digitar de novo.", Share2],
+] as const;
+
+const plans = [
+  {
+    nome: "Start", preco: "97", centavos: "90", destaque: false,
+    desc: "Pra quem ainda organiza tudo na planilha.",
+    itens: ["Painel executivo", "Financeiro completo", "Contas a pagar e receber", "Relatórios e usuários"],
+  },
+  {
+    nome: "Pro", preco: "147", centavos: "90", destaque: false,
+    desc: "Pra quem já vende e precisa de CRM e operação.",
+    itens: ["Tudo do Start", "Comercial (CRM) completo", "Módulos do seu segmento"],
+  },
+  {
+    nome: "Plus", preco: "190", centavos: "00", destaque: true,
+    desc: "Pra quem quer a operação inteira automatizada.",
+    itens: ["Tudo do Pro", "RH, ponto e folha completos", "Inteligência Nuvix"],
+  },
+] as const;
 
 function Cloud3D() {
   return (
@@ -105,7 +134,7 @@ function MiniDashboard() {
       <div className="rounded-[24px] bg-gradient-to-br from-[#240B55] to-[#8845F4] p-7 text-white">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-purple-200">Boa tarde — Nuvix</p>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-purple-200">Boa tarde, Nuvix</p>
             <h3 className="mt-3 text-3xl font-black">Dashboard Executivo</h3>
             <p className="mt-2 text-purple-100">Prestação de Serviço · Visão geral</p>
           </div>
@@ -158,7 +187,8 @@ export default function Home() {
           <nav className="hidden items-center gap-8 text-sm font-semibold text-slate-600 md:flex">
             <a href="#produto" className="hover:text-purple-600">Produto</a>
             <a href="#modulos" className="hover:text-purple-600">Módulos</a>
-            <a href="#solucoes" className="hover:text-purple-600">Soluções</a>
+            <a href="#varejo" className="hover:text-purple-600">Venda de Produto</a>
+            <a href="#precos" className="hover:text-purple-600">Preços</a>
             <a href="#contato" className="hover:text-purple-600">Contato</a>
           </nav>
           <div className="flex items-center gap-3">
@@ -182,7 +212,7 @@ export default function Home() {
               Entenda sua empresa em <span className="gradient-text">30 segundos.</span>
             </h1>
             <p className="mt-7 max-w-xl text-xl leading-9 text-slate-600">
-              Chega de planilha e achismo. Se não tiver dado suficiente pra um diagnóstico, a Nuvix avisa — nunca inventa número só pra parecer inteligente.
+              Chega de planilha e achismo. Se não tiver dado suficiente pra um diagnóstico, a Nuvix avisa e nunca inventa número só pra parecer inteligente.
             </p>
 
             <div className="mt-7 max-w-md rounded-2xl border border-slate-100 bg-white p-4 shadow-soft">
@@ -244,7 +274,7 @@ export default function Home() {
       <section id="produto" className="bg-slate-50 px-6 py-24">
         <SectionTitle eyebrow="Plataforma" title="Tudo conectado em tempo real." subtitle="A Nuvix une os módulos essenciais da operação para transformar dados em gestão." />
         <MiniDashboard />
-        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-slate-400">Tela ilustrativa, com dados de exemplo — na Nuvix de verdade, os números são sempre os seus.</p>
+        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-slate-400">Tela ilustrativa, com dados de exemplo. Na Nuvix de verdade, os números são sempre os seus.</p>
       </section>
 
       <section id="modulos" className="px-6 py-24">
@@ -260,6 +290,62 @@ export default function Home() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section id="varejo" className="noise px-6 py-24">
+        <SectionTitle eyebrow="Pra quem vende produto" title="Da prateleira até a nota fiscal, sem sistema paralelo." subtitle="Se sua empresa vende produto, seja loja física, e-commerce ou os dois, a Nuvix cuida do PDV, do estoque e da nota fiscal, e ainda conecta direto com o Mercado Livre, Nuvemshop, Shopee e PedidoOK." />
+        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-4">
+          {varejo.map(([title, desc, Icon]) => (
+            <div key={title} className="card-hover rounded-[28px] border border-slate-100 bg-white p-7 shadow-sm">
+              <div className="mb-6 grid h-12 w-12 place-items-center rounded-2xl bg-purple-50 text-purple-600">
+                <Icon size={22} />
+              </div>
+              <h3 className="text-xl font-black text-slate-950">{title}</h3>
+              <p className="mt-3 leading-7 text-slate-600">{desc}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mx-auto mt-8 max-w-7xl rounded-[28px] border border-purple-100 bg-purple-50/60 p-6 text-center">
+          <p className="text-sm font-bold text-purple-700">Já rodando com dinheiro de cliente de verdade: loja de varejo emitindo nota fiscal e vendendo no Mercado Livre pela Nuvix todos os dias.</p>
+        </div>
+      </section>
+
+      <section id="precos" className="bg-slate-50 px-6 py-24">
+        <SectionTitle eyebrow="Planos" title="Um plano pra cada estágio da sua operação." subtitle="Comece simples, cresça sem trocar de sistema. Todo plano começa com teste grátis, sem cartão e sem compromisso." />
+        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3 md:items-end">
+          {plans.map((p) => (
+            <div key={p.nome} className={p.destaque
+              ? "relative rounded-[32px] border-2 border-purple-600 bg-white p-8 shadow-2xl shadow-purple-200 md:scale-105"
+              : "card-hover rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm"}>
+              {p.destaque && (
+                <span className="absolute -top-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-purple-600 px-4 py-1.5 text-xs font-black uppercase tracking-wide text-white shadow-lg">
+                  <Sparkles size={12} /> Mais completo
+                </span>
+              )}
+              <p className={`text-sm font-black uppercase tracking-wider ${p.destaque ? "text-purple-600" : "text-slate-500"}`}>{p.nome}</p>
+              <p className="mt-4 flex items-baseline gap-1">
+                <span className="text-5xl font-black text-slate-950">R$ {p.preco}</span>
+                <span className="text-lg font-bold text-slate-500">,{p.centavos}</span>
+                <span className="ml-1 text-sm font-semibold text-slate-400">/mês por CNPJ</span>
+              </p>
+              <p className="mt-2 text-sm text-slate-500">{p.desc}</p>
+              <a href={contactLink} className={p.destaque
+                ? "mt-6 block rounded-2xl bg-purple-600 px-6 py-3.5 text-center font-black text-white shadow-lg shadow-purple-200 hover:bg-purple-700"
+                : "mt-6 block rounded-2xl border border-slate-200 px-6 py-3.5 text-center font-black text-slate-800 hover:border-purple-300"}>
+                Começar grátis
+              </a>
+              <div className={`mt-7 grid gap-3 border-t pt-7 ${p.destaque ? "border-purple-100" : "border-slate-100"}`}>
+                {p.itens.map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <CheckCircle2 size={20} className={`mt-0.5 flex-shrink-0 ${p.destaque ? "text-purple-600" : "text-emerald-500"}`} />
+                    <span className="text-sm font-medium text-slate-700">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="mx-auto mt-8 max-w-xl text-center text-sm text-slate-400">Ordens de Serviço, Serviços, Materiais e PDV/Estoque entram conforme o segmento contratado no momento da assinatura. Cada CNPJ é uma assinatura separada. Tem mais de uma loja ou filial? Fale com a gente sobre condições para múltiplos CNPJs.</p>
       </section>
 
       <section id="solucoes" className="bg-gradient-to-b from-white to-purple-50 px-6 py-24">
@@ -309,6 +395,45 @@ export default function Home() {
               <h3 className="text-2xl font-black text-slate-950">{title}</h3>
               <p className="mt-4 leading-7 text-slate-600">{desc}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-slate-950 px-6 py-24">
+        <SectionTitle eyebrow="Prova social" title="Não é promessa, é operação rodando." subtitle="Isso não é uma projeção de vendas. É o que já acontece hoje, com dinheiro e nota fiscal de cliente de verdade." />
+        <div className="mx-auto grid max-w-5xl gap-5 md:grid-cols-3">
+          {[
+            ["2 lojas", "da rede Yup rodam o PDV, o estoque e a nota fiscal pela Nuvix, todos os dias."],
+            ["Nota a cada venda", "NFC-e emitida direto pra SEFAZ no momento da venda, sem planilha paralela e sem depender de terceiro."],
+            ["Marketplace sincronizado", "Venda feita no Mercado Livre baixa o estoque na hora, sem digitar de novo em outro sistema."],
+          ].map(([title, desc]) => (
+            <div key={title} className="rounded-[28px] border border-white/10 bg-white/5 p-8">
+              <p className="text-3xl font-black text-white">{title}</p>
+              <p className="mt-3 leading-7 text-slate-300">{desc}</p>
+            </div>
+          ))}
+        </div>
+        {/* Depoimento com aspas da Yup entra aqui assim que eles autorizarem — nome, cargo e a frase exata deles, sem inventar. */}
+      </section>
+
+      <section className="px-6 py-24">
+        <SectionTitle eyebrow="Dúvidas" title="Perguntas frequentes." subtitle="O que empresas costumam perguntar antes de trocar de sistema." />
+        <div className="mx-auto max-w-3xl divide-y divide-slate-100 rounded-[32px] border border-slate-100">
+          {[
+            ["A Nuvix funciona por CNPJ ou posso usar em várias empresas com uma assinatura só?", "Cada assinatura é vinculada a um CNPJ. Se você tem mais de uma loja ou filial com CNPJ próprio, cada uma entra como uma assinatura, com condições especiais para múltiplos CNPJs, fale com a gente."],
+            ["Preciso instalar algum programa?", "Não. A Nuvix é 100% web: você acessa pelo navegador, do computador ou do celular, sem instalar nada e sem depender de servidor próprio."],
+            ["Meus dados ficam seguros e separados dos de outras empresas?", "Sim. Cada empresa tem seus dados isolados na nossa infraestrutura, ninguém de fora da sua empresa acessa suas informações."],
+            ["A emissão de nota fiscal é de verdade, direto pra SEFAZ?", "Sim. NFC-e e NF-e são emitidas e autorizadas pela SEFAZ direto na venda, sem exportar planilha nem depender de outro sistema para faturar."],
+            ["Funciona com Mercado Livre e outros marketplaces?", "Sim. Mercado Livre, Nuvemshop, Shopee e PedidoOK ficam conectados, venda feita no marketplace baixa o estoque na Nuvix automaticamente."],
+            ["Tem teste grátis? Preciso de cartão de crédito?", "Sim, todo plano começa com teste grátis, sem cartão e sem compromisso."],
+          ].map(([q, a]) => (
+            <details key={q} className="group px-8 py-6 open:bg-slate-50">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-slate-950">
+                {q}
+                <span className="flex-shrink-0 text-2xl font-black text-purple-600 transition-transform group-open:rotate-45">+</span>
+              </summary>
+              <p className="mt-4 leading-7 text-slate-600">{a}</p>
+            </details>
           ))}
         </div>
       </section>
