@@ -441,7 +441,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="inteligencia" className="noise bg-[#1b0b3a] px-6 py-24">
+      <section id="inteligencia" className="bg-[#1b0b3a] px-6 py-24">
         <SectionTitle eyebrow="Inteligência Nuvix" title="Sua operação avisa antes de virar problema." subtitle="A Nuvix olha os dados que você já confirma todo dia (financeiro, comercial, operação, estoque e RH) e aponta o que precisa de atenção, com o motivo e o nível de confiança. Sem achismo, sem número inventado." />
         <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 md:items-center">
           <div className="grid gap-4">
