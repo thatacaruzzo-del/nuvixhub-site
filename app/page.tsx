@@ -164,10 +164,10 @@ function ProductTour() {
 // de "negócio de serviço" enquanto os clientes reais mais maduros da Nuvix hoje são
 // de venda de produto (varejo com PDV, NFC-e e marketplace).
 const varejo = [
-  ["Caixa / PDV", "Venda rápida, desconto por item com aprovação, kits e combos, e emissão de NFC-e direto na venda.", CreditCard],
-  ["Estoque em tempo real", "Múltiplas lojas, validade, lote e consignado. O estoque baixa sozinho a cada venda, em qualquer canal.", Package],
-  ["Nota fiscal automática", "NFC-e e NF-e emitidas direto pra SEFAZ a cada venda, sem planilha, sem esquecer e sem depender de terceiro.", FileText],
-  ["Marketplace conectado", "Mercado Livre, Nuvemshop, Shopee e PedidoOK sincronizados de verdade. Vendeu lá, baixa aqui, sem digitar de novo.", Share2],
+  ["Caixa / PDV", "Venda rápida, desconto por item com aprovação, kits e combos, e emissão de NFC-e direto na venda.", CreditCard, "A partir do Pro"],
+  ["Estoque em tempo real", "Múltiplas lojas, validade, lote e consignado. O estoque baixa sozinho a cada venda, em qualquer canal.", Package, "A partir do Pro"],
+  ["Nota fiscal automática", "NFC-e e NF-e emitidas direto pra SEFAZ a cada venda, sem planilha, sem esquecer e sem depender de terceiro. Sem limite mensal no plano Plus.", FileText, "A partir do Pro"],
+  ["Marketplace conectado", "Mercado Livre, Nuvemshop, Shopee e PedidoOK sincronizados de verdade. Vendeu lá, baixa aqui, sem digitar de novo.", Share2, "Exclusivo do Plus"],
 ] as const;
 
 // Cada linha compara o que a maioria dos sistemas genéricos faz (ou não faz) com
@@ -191,13 +191,13 @@ const plans = [
   },
   {
     nome: "Pro", preco: "147", centavos: "90", destaque: false,
-    desc: "Pra quem já vende e precisa de Comercial e operação.",
-    itens: ["Tudo do Start", "Comercial completo", "Módulos do seu segmento"],
+    desc: "Pra quem já vende e precisa de operação completa.",
+    itens: ["Tudo do Start", "Caixa/PDV, estoque e comercial (CRM)", "Nota fiscal automática (NFC-e e NF-e)", "Módulos do seu segmento"],
   },
   {
     nome: "Plus", preco: "190", centavos: "00", destaque: true,
     desc: "Pra quem quer a operação inteira automatizada.",
-    itens: ["Tudo do Pro", "RH, ponto e folha completos", "Inteligência Nuvix"],
+    itens: ["Tudo do Pro", "Nota fiscal sem limite mensal", "Marketplaces conectados", "RH, ponto e folha completos", "Inteligência Nuvix"],
   },
 ] as const;
 
@@ -300,7 +300,7 @@ export default function Home() {
         <div className="mx-auto grid min-h-[760px] max-w-7xl items-center gap-12 px-6 py-16 md:grid-cols-2">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }}>
             <div className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-white px-4 py-2 text-sm font-black uppercase tracking-[0.18em] text-purple-600 shadow-sm">
-              <span className="h-2 w-2 rounded-full bg-purple-500" /> Feito pra pequenos negócios de serviço
+              <span className="h-2 w-2 rounded-full bg-purple-500" /> Pra quem vende produto ou presta serviço
             </div>
             <h1 className="mt-8 text-5xl font-black tracking-tight text-slate-950 md:text-7xl">
               Entenda sua empresa em <span className="gradient-text">30 segundos.</span>
@@ -403,14 +403,15 @@ export default function Home() {
       </section>
 
       <section id="varejo" className="noise px-6 py-24">
-        <SectionTitle eyebrow="Pra quem vende produto" title="Da prateleira até a nota fiscal, sem sistema paralelo." subtitle="Se sua empresa vende produto, seja loja física, e-commerce ou os dois, a Nuvix cuida do PDV, do estoque e da nota fiscal, e ainda conecta direto com o Mercado Livre, Nuvemshop, Shopee e PedidoOK." />
+        <SectionTitle eyebrow="Pra quem vende produto" title="Da prateleira até a nota fiscal, sem sistema paralelo." subtitle="Se sua empresa vende produto, seja loja física, e-commerce ou os dois, a Nuvix cuida do PDV, do estoque e da nota fiscal a partir do plano Pro, e conecta direto com o Mercado Livre, Nuvemshop, Shopee e PedidoOK no plano Plus." />
         <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-4">
-          {varejo.map(([title, desc, Icon]) => (
+          {varejo.map(([title, desc, Icon, plano]) => (
             <div key={title} className="card-hover rounded-[28px] border border-slate-100 bg-white p-7 shadow-sm">
               <div className="mb-6 grid h-12 w-12 place-items-center rounded-2xl bg-purple-50 text-purple-600">
                 <Icon size={22} />
               </div>
               <h3 className="text-xl font-black text-slate-950">{title}</h3>
+              <span className="mt-3 inline-block rounded-full bg-purple-50 px-3 py-1 text-[11px] font-black uppercase tracking-wide text-purple-600">{plano}</span>
               <p className="mt-3 leading-7 text-slate-600">{desc}</p>
             </div>
           ))}
@@ -536,7 +537,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <p className="mx-auto mt-8 max-w-xl text-center text-sm text-slate-400">Ordens de Serviço, Serviços, Materiais e PDV/Estoque entram conforme o segmento contratado no momento da assinatura. Cada CNPJ é uma assinatura separada. Tem mais de uma loja ou filial? Fale com a gente sobre condições para múltiplos CNPJs.</p>
+        <p className="mx-auto mt-8 max-w-xl text-center text-sm text-slate-400">Ordens de Serviço, Serviços, Materiais e PDV/Estoque entram conforme o segmento contratado no momento da assinatura. No plano Pro a nota fiscal automática tem um limite mensal de emissões, no Plus é ilimitada. Cada CNPJ é uma assinatura separada. Tem mais de uma loja ou filial? Fale com a gente sobre condições para múltiplos CNPJs.</p>
       </section>
 
       <section id="solucoes" className="bg-gradient-to-b from-white to-purple-50 px-6 py-24">
