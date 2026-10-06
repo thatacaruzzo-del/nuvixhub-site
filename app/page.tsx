@@ -6,9 +6,9 @@ import { Float, OrbitControls, RoundedBox, Sphere } from "@react-three/drei";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import {
-  BarChart3, BriefcaseBusiness, CheckCircle2, ClipboardList, Cloud, Cog, Compass, Database,
-  DollarSign, FileText, Layers3, Mail, Package, ShieldCheck, Users,
-  Wrench, ArrowRight, Menu, X, CreditCard, Share2, Sparkles, Brain, PlugZap, ScanSearch, ListChecks
+  BarChart3, BriefcaseBusiness, CheckCircle2, ChevronDown, ClipboardList, Cloud, Database,
+  DollarSign, FileText, Mail, Package, ShieldCheck, Users,
+  Wrench, ArrowRight, Menu, X, CreditCard, Share2, Sparkles
 } from "lucide-react";
 import { OPEN_COOKIE_PREFS_EVENT } from "./components/CookieConsent";
 
@@ -93,22 +93,15 @@ function Logo() {
 }
 
 const modules = [
-  ["Painel Executivo", "Indicadores em tempo real para decisões mais rápidas.", BarChart3],
-  ["Financeiro", "Receitas, despesas, fluxo de caixa e controle completo.", DollarSign],
-  ["Comercial", "Clientes, oportunidades e relacionamento comercial integrados.", Users],
-  ["Ordens de Serviço", "Cadastro, status, prioridades e acompanhamento operacional.", ClipboardList],
-  ["Serviços", "Organização dos serviços prestados e rotinas da operação.", Wrench],
-  ["Materiais", "Controle de materiais vinculados à operação.", Package],
-  ["RH", "Colaboradores, folha, ponto, férias e rescisões.", BriefcaseBusiness],
-  ["Relatórios", "Análises para gestão, auditoria e acompanhamento.", FileText],
-];
-
-const pains = [
-  ["Retrabalho", "Equipes repetem lançamentos por falta de uma base única."],
-  ["Planilhas", "Controles paralelos quebram processos e tornam os indicadores frágeis."],
-  ["Falta de controle", "Gestores só enxergam problemas depois que eles impactam a operação."],
-  ["Informações descentralizadas", "Dados importantes ficam presos em departamentos e conversas."],
-];
+  ["Painel Executivo", BarChart3],
+  ["Financeiro", DollarSign],
+  ["Comercial", Users],
+  ["Ordens de Serviço", ClipboardList],
+  ["Serviços", Wrench],
+  ["Materiais", Package],
+  ["RH", BriefcaseBusiness],
+  ["Relatórios", FileText],
+] as const;
 
 const productShots = [
   ["Painel", "/produto/painel.jpg", "Indicadores em tempo real e o resumo do dia, pra decisão rápida sem abrir seis telas."],
@@ -160,27 +153,13 @@ function ProductTour() {
 }
 
 // Quem já vende produto (loja física, e-commerce ou os dois) não usa OS/Serviços,
-// usa PDV, estoque e nota fiscal. Essa seção existia como gap real: o site falava só
-// de "negócio de serviço" enquanto os clientes reais mais maduros da Nuvix hoje são
-// de venda de produto (varejo com PDV, NFC-e e marketplace).
+// usa PDV, estoque e nota fiscal. Renderizado como chips compactos (não cards
+// longos) pra caber no orçamento de altura do mobile.
 const varejo = [
-  ["Caixa / PDV", "Venda rápida, desconto por item com aprovação, kits e combos, e emissão de NFC-e direto na venda.", CreditCard, "A partir do Pro"],
-  ["Estoque em tempo real", "Múltiplas lojas, validade, lote e consignado. O estoque baixa sozinho a cada venda, em qualquer canal.", Package, "A partir do Pro"],
-  ["Nota fiscal automática", "NFC-e e NF-e emitidas direto pra SEFAZ a cada venda, sem planilha, sem esquecer e sem depender de terceiro. Sem limite mensal no plano Plus.", FileText, "A partir do Pro"],
-  ["Marketplace conectado", "Mercado Livre, Nuvemshop, Shopee e PedidoOK sincronizados de verdade. Vendeu lá, baixa aqui, sem digitar de novo.", Share2, "Exclusivo do Plus"],
-] as const;
-
-// Cada linha compara o que a maioria dos sistemas genéricos faz (ou não faz) com
-// o que a Nuvix já entrega hoje, em produção, não uma promessa de roadmap.
-const diferenciais = [
-  ["Nota fiscal", "Emitida à parte, na mão", "Direto na venda, pra SEFAZ", FileText],
-  ["Marketplace", "Estoque atualizado na mão", "Estoque sincronizado sozinho", Share2],
-  ["Caixa / PDV", "Desconto só no total", "Desconto por item, com aprovação", CreditCard],
-  ["RH", "Folha em planilha à parte", "Ponto e folha no sistema", BriefcaseBusiness],
-  ["Relatórios", "Números soltos, você interpreta", "Inteligência aponta o que importa", BarChart3],
-  ["Entre módulos", "Cada área, um sistema", "Tudo conectado em tempo real", Layers3],
-  ["Seu segmento", "Sistema genérico pra todos", "Módulos do seu segmento", Cog],
-  ["Implantação", "Servidor e TI própria", "100% em nuvem", Cloud],
+  ["Caixa / PDV com NFC-e", CreditCard, "A partir do Pro"],
+  ["Estoque em tempo real", Package, "A partir do Pro"],
+  ["Nota fiscal automática", FileText, "A partir do Pro"],
+  ["Marketplace conectado", Share2, "Exclusivo do Plus"],
 ] as const;
 
 const plans = [
@@ -201,44 +180,67 @@ const plans = [
   },
 ] as const;
 
-// A imagem antiga só mostrava o fluxo de serviço (Comercial → OS → Materiais).
-// Hoje o cliente mais maduro da Nuvix é de venda de produto, então o fluxo
-// precisa mostrar as duas pontas: quem presta serviço e quem vende produto.
-const fluxos = {
-  servico: {
-    eyebrow: "Fluxo de serviço",
-    title: "Do cliente ao financeiro, sem perder informação no caminho.",
-    desc: "A Nuvix conecta Comercial, Ordens de Serviço, materiais, financeiro, RH e relatórios para que a gestão tenha clareza do que está acontecendo.",
-    passos: ["Cliente cadastrado", "Ordem de Serviço criada", "Materiais vinculados", "Financeiro atualizado", "Indicadores em tempo real"],
-  },
-  venda: {
-    eyebrow: "Fluxo de vendas",
-    title: "Da venda ao financeiro, sem digitar duas vezes.",
-    desc: "Seja no PDV ou no Mercado Livre, Nuvemshop, Shopee e PedidoOK, a venda já nasce conectada: estoque, nota fiscal e financeiro atualizam sozinhos.",
-    passos: ["Venda no PDV ou marketplace", "Estoque baixa sozinho", "Nota fiscal emitida (NFC-e/NF-e)", "Financeiro atualizado", "Indicadores em tempo real"],
-  },
-} as const;
-
 function SectionTitle({ eyebrow, title, subtitle, dark }: { eyebrow: string; title: string; subtitle: string; dark?: boolean }) {
   return (
-    <div className="mx-auto mb-12 max-w-3xl text-center">
+    <div className="mx-auto mb-10 max-w-3xl text-center">
       <p className={`text-sm font-black uppercase tracking-[0.28em] ${dark ? "text-purple-400" : "text-purple-500"}`}>{eyebrow}</p>
-      <h2 className={`mt-4 text-4xl font-black tracking-tight md:text-5xl ${dark ? "text-white" : "text-slate-950"}`}>{title}</h2>
-      <p className={`mt-5 text-lg leading-8 ${dark ? "text-slate-300" : "text-slate-600"}`}>{subtitle}</p>
+      <h2 className={`mt-3 text-3xl font-black tracking-tight md:text-5xl ${dark ? "text-white" : "text-slate-950"}`}>{title}</h2>
+      <p className={`mt-4 text-base leading-7 md:text-lg md:leading-8 ${dark ? "text-slate-300" : "text-slate-600"}`}>{subtitle}</p>
+    </div>
+  );
+}
+
+function PlanCard({ p }: { p: (typeof plans)[number] }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={p.destaque
+      ? "relative rounded-[28px] border-2 border-purple-600 bg-white p-6 shadow-2xl shadow-purple-200 md:p-8 md:scale-105"
+      : "card-hover rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm md:p-8"}>
+      {p.destaque && (
+        <span className="absolute -top-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-purple-600 px-4 py-1.5 text-xs font-black uppercase tracking-wide text-white shadow-lg">
+          <Sparkles size={12} /> Mais completo
+        </span>
+      )}
+      <p className={`text-sm font-black uppercase tracking-wider ${p.destaque ? "text-purple-600" : "text-slate-500"}`}>{p.nome}</p>
+      <p className="mt-3 flex items-baseline gap-1">
+        <span className="text-4xl font-black text-slate-950 md:text-5xl">R$ {p.preco}</span>
+        <span className="text-lg font-bold text-slate-500">,{p.centavos}</span>
+        <span className="ml-1 text-sm font-semibold text-slate-400">/mês por CNPJ</span>
+      </p>
+      <p className="mt-2 text-sm text-slate-500">{p.desc}</p>
+      <a href={contactLink} className={p.destaque
+        ? "mt-5 block rounded-2xl bg-purple-600 px-6 py-3.5 text-center font-black text-white shadow-lg shadow-purple-200 hover:bg-purple-700"
+        : "mt-5 block rounded-2xl border border-slate-200 px-6 py-3.5 text-center font-black text-slate-800 hover:border-purple-300"}>
+        Começar grátis
+      </a>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="mt-5 flex w-full items-center justify-center gap-1.5 border-t border-slate-100 pt-5 text-sm font-bold text-purple-600"
+      >
+        {open ? "Ocultar o que inclui" : "Ver o que inclui"}
+        <ChevronDown size={16} className={`transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <div className="mt-4 grid gap-3">
+          {p.itens.map((item) => (
+            <div key={item} className="flex items-start gap-3">
+              <CheckCircle2 size={20} className={`mt-0.5 flex-shrink-0 ${p.destaque ? "text-purple-600" : "text-emerald-500"}`} />
+              <span className="text-sm font-medium text-slate-700">{item}</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [fluxoAtivo, setFluxoAtivo] = useState<"servico" | "venda">("venda");
   const navLinks = [
-    ["#produto", "Produto"],
-    ["#modulos", "Módulos"],
-    ["#varejo", "Venda de Produto"],
-    ["#inteligencia", "Inteligência Nuvix"],
+    ["#produto", "Plataforma"],
     ["#precos", "Preços"],
-    ["#solucoes", "Soluções"],
     ["#contato", "Contato"],
   ] as const;
 
@@ -296,21 +298,21 @@ export default function Home() {
         )}
       </header>
 
-      <section className="noise pt-32">
-        <div className="mx-auto grid min-h-[760px] max-w-7xl items-center gap-12 px-6 py-16 md:grid-cols-2">
+      <section className="noise pt-28 md:pt-32">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-10 md:min-h-[760px] md:grid-cols-2 md:py-16">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }}>
             <div className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-white px-4 py-2 text-sm font-black uppercase tracking-[0.18em] text-purple-600 shadow-sm">
               <span className="h-2 w-2 rounded-full bg-purple-500" /> Pra quem vende produto ou presta serviço
             </div>
-            <h1 className="mt-8 text-5xl font-black tracking-tight text-slate-950 md:text-7xl">
+            <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-950 md:mt-8 md:text-7xl">
               Entenda sua empresa em <span className="gradient-text">30 segundos.</span>
             </h1>
-            <p className="mt-7 max-w-xl text-xl leading-9 text-slate-600">
+            <p className="mt-5 max-w-xl text-lg leading-8 text-slate-600 md:mt-7 md:text-xl md:leading-9">
               Chega de planilha e achismo. A Nuvix não automatiza sua decisão por você. Mostra o dado real e a sugestão, e quem decide continua sendo você.
             </p>
 
-            <div className="mt-7 max-w-md rounded-2xl border border-slate-100 bg-white p-4 shadow-soft">
-              <p className="text-[11px] font-black uppercase tracking-[0.14em] text-purple-500">Inteligência Nuvix</p>
+            <div className="mt-5 max-w-md rounded-2xl border border-slate-100 bg-white p-4 shadow-soft md:mt-7">
+              <p className="text-[11px] font-black uppercase tracking-[0.14em] text-purple-500">Inteligência Nuvix · exclusivo do Plus</p>
               <div className="mt-2 flex items-start gap-2">
                 <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-500" />
                 <p className="text-sm leading-6 text-slate-800">
@@ -320,38 +322,22 @@ export default function Home() {
               <p className="mt-3 border-t border-slate-100 pt-3 text-[11px] text-slate-400">Confiança: alta · calculado com dados confirmados</p>
             </div>
 
-            {/* Segundo exemplo: mostra o outro lado da mesma promessa do subtítulo — quando
-                não há dado suficiente, o sistema avisa em vez de arriscar um número. Sem selo
-                de confiança nenhum aqui, de propósito. */}
-            <div className="mt-3 max-w-md rounded-2xl border border-slate-100 bg-white p-4 shadow-soft">
-              <p className="text-[11px] font-black uppercase tracking-[0.14em] text-purple-500">Inteligência Nuvix</p>
-              <div className="mt-2 flex items-start gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-slate-400" />
-                <p className="text-sm leading-6 text-slate-800">
-                  <b className="font-bold">Ainda reunindo dados sobre Folha de Pagamento.</b> Faltam lançamentos confirmados pra um diagnóstico confiável.
-                </p>
-              </div>
-              <p className="mt-3 border-t border-slate-100 pt-3 text-[11px] text-slate-400">Sem confiança suficiente pra opinar ainda</p>
-            </div>
-
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row md:mt-9 md:gap-4">
               <a href={contactLink} className="inline-flex items-center justify-center gap-2 rounded-2xl bg-purple-600 px-7 py-4 font-black text-white shadow-xl shadow-purple-200 hover:bg-purple-700">
                 Solicitar demonstração <ArrowRight size={18} />
               </a>
-              <a href="#modulos" className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-7 py-4 font-black text-slate-800 hover:border-purple-300">
+              <a href="#produto" className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-7 py-4 font-black text-slate-800 hover:border-purple-300">
                 Conhecer a plataforma
               </a>
             </div>
-            <div className="mt-8 flex flex-wrap gap-5 text-sm font-bold text-slate-500">
+            <div className="mt-6 flex flex-wrap gap-4 text-sm font-bold text-slate-500 md:mt-8 md:gap-5">
               <span className="inline-flex items-center gap-2"><Cloud size={16} className="text-purple-500" /> 100% em nuvem</span>
-              <span className="inline-flex items-center gap-2"><Layers3 size={16} className="text-purple-500" /> Diagnóstico honesto</span>
               <span className="inline-flex items-center gap-2"><Database size={16} className="text-purple-500" /> Tudo conectado</span>
-              <span className="inline-flex items-center gap-2"><Compass size={16} className="text-purple-500" /> Copiloto, não piloto automático</span>
-              <span className="inline-flex items-center gap-2"><ShieldCheck size={16} className="text-purple-500" /> Isolamento de dados por empresa</span>
+              <span className="inline-flex items-center gap-2"><ShieldCheck size={16} className="text-purple-500" /> Dados isolados por empresa</span>
             </div>
           </motion.div>
 
-          <div className="relative">
+          <div className="relative hidden md:block">
             <div className="absolute inset-0 rounded-full bg-purple-200 blur-3xl opacity-50" />
             <Cloud3D />
             <div className="absolute left-6 top-8 float rounded-3xl border border-purple-100 bg-white/85 p-4 shadow-soft backdrop-blur">
@@ -366,267 +352,68 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-6 py-24">
-        <SectionTitle eyebrow="Problema" title="Sua operação está espalhada em vários sistemas?" subtitle="Quando cada área trabalha em uma ferramenta diferente, a gestão perde velocidade, contexto e previsibilidade." />
-        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-4">
-          {pains.map(([title, desc]) => (
-            <div key={title} className="card-hover rounded-[28px] border border-slate-100 bg-white p-7 shadow-sm">
-              <div className="mb-6 grid h-12 w-12 place-items-center rounded-2xl bg-purple-50 text-purple-600">
-                <Layers3 size={22} />
-              </div>
-              <h3 className="text-xl font-black text-slate-950">{title}</h3>
-              <p className="mt-3 leading-7 text-slate-600">{desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="produto" className="bg-slate-50 px-6 py-24">
-        <SectionTitle eyebrow="Plataforma" title="Isso não é ilustração. É o produto." subtitle="Seis áreas, um sistema só. Clique e veja a tela real de cada uma." />
+      <section id="produto" className="bg-slate-50 px-6 py-14 md:py-24">
+        <SectionTitle eyebrow="Plataforma" title="Tudo que sua empresa precisa, num sistema só." subtitle="Clique e veja a tela real de cada área. Dados de exemplo aqui, na Nuvix de verdade são sempre os seus." />
         <ProductTour />
-        <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-slate-400">Telas reais do sistema, com dados de exemplo. Na Nuvix de verdade, os números são sempre os seus.</p>
-      </section>
 
-      <section id="modulos" className="px-6 py-24">
-        <SectionTitle eyebrow="Módulos" title="Uma plataforma para toda a empresa." subtitle="Cada área trabalha melhor quando as informações conversam entre si." />
-        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-4">
-          {modules.map(([title, desc, Icon]: any) => (
-            <div key={title} className="card-hover rounded-[28px] border border-slate-100 bg-white p-7 shadow-sm">
-              <div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-purple-50 text-purple-600">
-                <Icon size={22} />
-              </div>
-              <h3 className="text-lg font-black text-slate-950">{title}</h3>
-              <p className="mt-3 text-sm leading-7 text-slate-600">{desc}</p>
-            </div>
+        <div className="mx-auto mt-10 flex max-w-4xl flex-wrap justify-center gap-2 md:mt-14">
+          {modules.map(([title, Icon]) => (
+            <span key={title} className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-700 shadow-sm">
+              <Icon size={16} className="text-purple-500" /> {title}
+            </span>
           ))}
         </div>
-      </section>
 
-      <section id="varejo" className="noise px-6 py-24">
-        <SectionTitle eyebrow="Pra quem vende produto" title="Da prateleira até a nota fiscal, sem sistema paralelo." subtitle="Se sua empresa vende produto, seja loja física, e-commerce ou os dois, a Nuvix cuida do PDV, do estoque e da nota fiscal a partir do plano Pro, e conecta direto com o Mercado Livre, Nuvemshop, Shopee e PedidoOK no plano Plus." />
-        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-4">
-          {varejo.map(([title, desc, Icon, plano]) => (
-            <div key={title} className="card-hover rounded-[28px] border border-slate-100 bg-white p-7 shadow-sm">
-              <div className="mb-6 grid h-12 w-12 place-items-center rounded-2xl bg-purple-50 text-purple-600">
-                <Icon size={22} />
-              </div>
-              <h3 className="text-xl font-black text-slate-950">{title}</h3>
-              <span className="mt-3 inline-block rounded-full bg-purple-50 px-3 py-1 text-[11px] font-black uppercase tracking-wide text-purple-600">{plano}</span>
-              <p className="mt-3 leading-7 text-slate-600">{desc}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mx-auto mt-8 max-w-7xl rounded-[28px] border border-purple-100 bg-purple-50/60 p-6 text-center">
-          <p className="text-sm font-bold text-purple-700">Já rodando com dinheiro de cliente de verdade: loja de varejo emitindo nota fiscal e vendendo no Mercado Livre pela Nuvix todos os dias.</p>
-        </div>
-      </section>
-
-      <section id="diferenciais" className="bg-slate-50 px-6 py-24">
-        <SectionTitle eyebrow="Comparativo" title="Por que trocar de sistema pela Nuvix." subtitle="Passe o mouse em cada card. A maioria dos sistemas resolve um pedaço da operação, a Nuvix resolve a operação inteira." />
-        <div className="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {diferenciais.map(([area, comum, nuvix, Icon]) => (
-            <div key={area} className="card-hover group rounded-[28px] border border-slate-100 bg-white p-7 shadow-sm">
-              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-purple-50 text-purple-600 transition-colors duration-300 group-hover:bg-purple-600 group-hover:text-white">
-                <Icon size={22} />
-              </div>
-              <h3 className="mt-5 text-lg font-black text-slate-950">{area}</h3>
-              <div className="mt-4 flex items-center gap-2 text-sm text-slate-400">
-                <X size={14} strokeWidth={3} className="flex-shrink-0" />
-                <span className="line-through decoration-slate-300">{comum}</span>
-              </div>
-              <div className="mt-2 flex items-start gap-2 text-sm font-black text-purple-700">
-                <CheckCircle2 size={16} strokeWidth={2.5} className="mt-0.5 flex-shrink-0 text-purple-600" />
-                {nuvix}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="inteligencia" className="bg-[#1b0b3a] px-6 py-24">
-        <SectionTitle dark eyebrow="Inteligência Nuvix" title="Sua operação avisa antes de virar problema." subtitle="A Nuvix olha os dados que você já confirma todo dia (financeiro, comercial, operação, estoque e RH) e aponta o que precisa de atenção, com o motivo e o nível de confiança. Sem achismo, sem número inventado." />
-        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 md:items-center">
-          <div className="grid gap-4">
-            {[
-              [PlugZap, "Conecta com o que você já preenche", "Financeiro, Comercial, Ordens de Serviço, estoque e ponto, sem digitar nada a mais."],
-              [ScanSearch, "Cruza os números automaticamente", "Compara o período atual com o anterior e aplica regras de negócio reais, não um modelo genérico adivinhando."],
-              [ListChecks, "Prioriza o que importa", "No máximo os insights mais relevantes primeiro, cada um com nível de confiança e uma recomendação."],
-            ].map(([Icon, title, desc]: any) => (
-              <div key={title} className="flex items-start gap-4 rounded-[24px] border border-white/10 bg-white/5 p-6">
-                <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-2xl bg-purple-500/20 text-purple-300">
-                  <Icon size={20} />
-                </div>
-                <div>
-                  <p className="font-black text-white">{title}</p>
-                  <p className="mt-1 text-sm leading-6 text-slate-300">{desc}</p>
-                </div>
-              </div>
-            ))}
-            <div className="mt-2 flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-purple-500/20 px-4 py-1.5 text-xs font-black uppercase tracking-wide text-purple-300">
-                <Sparkles size={12} /> Exclusivo do plano Plus
+        <div className="mx-auto mt-8 max-w-4xl">
+          <p className="mb-4 text-center text-sm font-bold uppercase tracking-wide text-purple-600">Pra quem vende produto</p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {varejo.map(([title, Icon, plano]) => (
+              <span key={title} className="inline-flex items-center gap-2 rounded-full border border-purple-100 bg-purple-50/60 px-4 py-2 text-sm font-bold text-purple-800">
+                <Icon size={16} className="text-purple-600" /> {title}
+                <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-black uppercase tracking-wide text-purple-500">{plano}</span>
               </span>
-            </div>
-          </div>
-
-          <div className="grid gap-3">
-            <div className="rounded-2xl border border-white/10 bg-white p-5">
-              <div className="flex items-start gap-2.5">
-                <span className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-rose-500" />
-                <p className="text-sm leading-6 text-slate-800"><b className="font-bold">Prioridade:</b> caixa projetado fica negativo em 9 dias, no ritmo atual de entradas e saídas.</p>
-              </div>
-              <p className="mt-2 pl-[18px] text-[11px] text-slate-400">Confiança: alta · calculado com dados confirmados</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white p-5">
-              <div className="flex items-start gap-2.5">
-                <span className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-amber-500" />
-                <p className="text-sm leading-6 text-slate-800"><b className="font-bold">Atenção:</b> contas a pagar dos próximos 30 dias estão bem acima do que você tem a receber no mesmo período.</p>
-              </div>
-              <p className="mt-2 pl-[18px] text-[11px] text-slate-400">Confiança: alta · calculado com dados confirmados</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white p-5">
-              <div className="flex items-start gap-2.5">
-                <span className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-emerald-500" />
-                <p className="text-sm leading-6 text-slate-800"><b className="font-bold">Oportunidade:</b> taxa de conversão comercial subiu nas últimas semanas, vale repetir o que mudou.</p>
-              </div>
-              <p className="mt-2 pl-[18px] text-[11px] text-slate-400">Confiança: média · calculado com dados confirmados</p>
-            </div>
-            <div className="rounded-2xl border border-dashed border-slate-200 bg-white/60 p-5">
-              <div className="flex items-start gap-2.5">
-                <Brain size={16} className="mt-0.5 flex-shrink-0 text-slate-400" />
-                <p className="text-sm leading-6 text-slate-500">Sem dado confirmado suficiente, a Nuvix avisa que ainda está reunindo informação, em vez de chutar um número.</p>
-              </div>
-            </div>
-            <p className="text-center text-xs text-slate-400">Exemplos ilustrativos. Na Nuvix de verdade, os insights são sempre sobre os seus dados.</p>
+            ))}
           </div>
         </div>
+
+        <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-7 text-slate-500">
+          Nota fiscal direto na venda pra SEFAZ, estoque sincronizado sozinho com o marketplace, ponto e folha de RH no mesmo sistema. Já rodando com dinheiro de cliente de verdade, não é promessa de roadmap.
+        </p>
       </section>
 
-      <section id="precos" className="bg-slate-50 px-6 py-24">
+      <section id="precos" className="px-6 py-14 md:py-24">
         <SectionTitle eyebrow="Planos" title="Um plano pra cada estágio da sua operação." subtitle="Comece simples, cresça sem trocar de sistema. Todo plano começa com teste grátis, sem cartão e sem compromisso." />
-        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3 md:items-end">
+        <div className="mx-auto grid max-w-6xl gap-5 md:grid-cols-3 md:items-end md:gap-6">
           {plans.map((p) => (
-            <div key={p.nome} className={p.destaque
-              ? "relative rounded-[32px] border-2 border-purple-600 bg-white p-8 shadow-2xl shadow-purple-200 md:scale-105"
-              : "card-hover rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm"}>
-              {p.destaque && (
-                <span className="absolute -top-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-purple-600 px-4 py-1.5 text-xs font-black uppercase tracking-wide text-white shadow-lg">
-                  <Sparkles size={12} /> Mais completo
-                </span>
-              )}
-              <p className={`text-sm font-black uppercase tracking-wider ${p.destaque ? "text-purple-600" : "text-slate-500"}`}>{p.nome}</p>
-              <p className="mt-4 flex items-baseline gap-1">
-                <span className="text-5xl font-black text-slate-950">R$ {p.preco}</span>
-                <span className="text-lg font-bold text-slate-500">,{p.centavos}</span>
-                <span className="ml-1 text-sm font-semibold text-slate-400">/mês por CNPJ</span>
-              </p>
-              <p className="mt-2 text-sm text-slate-500">{p.desc}</p>
-              <a href={contactLink} className={p.destaque
-                ? "mt-6 block rounded-2xl bg-purple-600 px-6 py-3.5 text-center font-black text-white shadow-lg shadow-purple-200 hover:bg-purple-700"
-                : "mt-6 block rounded-2xl border border-slate-200 px-6 py-3.5 text-center font-black text-slate-800 hover:border-purple-300"}>
-                Começar grátis
-              </a>
-              <div className={`mt-7 grid gap-3 border-t pt-7 ${p.destaque ? "border-purple-100" : "border-slate-100"}`}>
-                {p.itens.map((item) => (
-                  <div key={item} className="flex items-start gap-3">
-                    <CheckCircle2 size={20} className={`mt-0.5 flex-shrink-0 ${p.destaque ? "text-purple-600" : "text-emerald-500"}`} />
-                    <span className="text-sm font-medium text-slate-700">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <PlanCard key={p.nome} p={p} />
           ))}
         </div>
-        <p className="mx-auto mt-8 max-w-xl text-center text-sm text-slate-400">Ordens de Serviço, Serviços, Materiais e PDV/Estoque entram conforme o segmento contratado no momento da assinatura. No plano Pro a nota fiscal automática tem um limite mensal de emissões, no Plus é ilimitada. Cada CNPJ é uma assinatura separada. Tem mais de uma loja ou filial? Fale com a gente sobre condições para múltiplos CNPJs.</p>
+        <p className="mx-auto mt-8 max-w-xl text-center text-sm text-slate-400">Ordens de Serviço, Serviços, Materiais e PDV/Estoque entram conforme o segmento contratado. No plano Pro a nota fiscal automática tem limite mensal, no Plus é ilimitada. Cada CNPJ é uma assinatura separada, condições especiais pra múltiplos CNPJs.</p>
       </section>
 
-      <section id="solucoes" className="bg-gradient-to-b from-white to-purple-50 px-6 py-24">
-        <div className="mx-auto mb-10 flex max-w-7xl justify-center gap-2">
-          <button
-            onClick={() => setFluxoAtivo("venda")}
-            className={`rounded-full border px-5 py-2.5 text-sm font-bold transition-colors ${fluxoAtivo === "venda" ? "border-purple-600 bg-purple-600 text-white" : "border-slate-200 bg-white text-slate-600 hover:border-purple-300"}`}
-          >
-            Venda de produto
-          </button>
-          <button
-            onClick={() => setFluxoAtivo("servico")}
-            className={`rounded-full border px-5 py-2.5 text-sm font-bold transition-colors ${fluxoAtivo === "servico" ? "border-purple-600 bg-purple-600 text-white" : "border-slate-200 bg-white text-slate-600 hover:border-purple-300"}`}
-          >
-            Prestação de serviço
-          </button>
-        </div>
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-black uppercase tracking-[0.28em] text-purple-500">{fluxos[fluxoAtivo].eyebrow}</p>
-          <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 md:text-5xl">
-            {fluxos[fluxoAtivo].title}
-          </h2>
-          <p className="mt-6 text-lg leading-8 text-slate-600">
-            {fluxos[fluxoAtivo].desc}
-          </p>
-        </div>
-        <div className="mx-auto mt-10 grid max-w-2xl gap-4">
-          {fluxos[fluxoAtivo].passos.map((step, i) => (
-            <div key={step} className="flex items-center gap-4 rounded-2xl border border-purple-100 bg-white p-4 shadow-sm">
-              <div className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-full bg-purple-600 text-sm font-black text-white">{i + 1}</div>
-              <span className="font-bold text-slate-800">{step}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="px-6 py-24">
-        <SectionTitle eyebrow="Benefícios" title="Mais produtividade. Mais controle." subtitle="Uma operação conectada reduz retrabalho e melhora a qualidade das decisões." />
-        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
-          {[
-            ["Centralização", "Um único sistema para dados, rotinas, aprovações e gestão."],
-            ["Controle operacional", "Acompanhe prazos, ordens e execução em tempo real."],
-            ["Gestão financeira", "Conecte contas, clientes, custos e previsões à operação."],
-            ["Comercial integrado", "O relacionamento comercial conversa com entregas e faturamento."],
-            ["Indicadores", "KPIs executivos sempre atualizados para decisões rápidas."],
-            ["Relatórios", "Análises consistentes para rotina, auditoria e diretoria."],
-          ].map(([title, desc]) => (
-            <div key={title} className="rounded-[28px] border border-slate-100 bg-slate-50 p-8">
-              <h3 className="text-2xl font-black text-slate-950">{title}</h3>
-              <p className="mt-4 leading-7 text-slate-600">{desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-[#1b0b3a] px-6 py-24">
+      <section className="bg-[#1b0b3a] px-6 py-14 md:py-24">
         <SectionTitle dark eyebrow="Prova social" title="Não é promessa, é operação rodando." subtitle="Isso não é uma projeção de vendas. É o que já acontece hoje, com dinheiro e nota fiscal de cliente de verdade." />
-        <div className="mx-auto mb-14 flex max-w-4xl flex-wrap items-center justify-center gap-x-10 gap-y-4">
+        <div className="mx-auto mb-8 flex max-w-4xl flex-wrap items-center justify-center gap-x-10 gap-y-3 md:mb-10">
           {["Caruzzo Express", "CZ Sunglass", "Yup Presentes Criativos"].map((nome) => (
             <span key={nome} className="text-lg font-black tracking-tight text-white/70">{nome}</span>
           ))}
         </div>
-        <div className="mx-auto grid max-w-5xl gap-5 md:grid-cols-3">
-          {[
-            ["2 lojas", "da rede Yup rodam o PDV, o estoque e a nota fiscal pela Nuvix, todos os dias."],
-            ["Nota a cada venda", "NFC-e emitida direto pra SEFAZ no momento da venda, sem planilha paralela e sem depender de terceiro."],
-            ["Marketplace sincronizado", "Venda feita no Mercado Livre baixa o estoque na hora, sem digitar de novo em outro sistema."],
-          ].map(([title, desc]) => (
-            <div key={title} className="rounded-[28px] border border-white/10 bg-white/5 p-8">
-              <p className="text-3xl font-black text-white">{title}</p>
-              <p className="mt-3 leading-7 text-slate-300">{desc}</p>
-            </div>
-          ))}
-        </div>
-        {/* Depoimento com aspas da Yup entra aqui assim que eles autorizarem, nome, cargo e a frase exata deles, sem inventar. */}
+        <p className="mx-auto max-w-3xl text-center text-base leading-7 text-slate-300 md:text-lg md:leading-8">
+          2 lojas da rede Yup rodam o PDV, o estoque e a nota fiscal pela Nuvix todos os dias: NFC-e emitida direto pra SEFAZ a cada venda, e o estoque sincroniza sozinho com o Mercado Livre, sem digitar nada duas vezes.
+        </p>
       </section>
 
-      <section className="px-6 py-24">
+      <section className="px-6 py-14 md:py-24">
         <SectionTitle eyebrow="Dúvidas" title="Perguntas frequentes." subtitle="O que empresas costumam perguntar antes de trocar de sistema." />
         <div className="mx-auto max-w-3xl divide-y divide-slate-100 rounded-[32px] border border-slate-100">
           {[
             ["A Nuvix funciona por CNPJ ou posso usar em várias empresas com uma assinatura só?", "Cada assinatura é vinculada a um CNPJ. Se você tem mais de uma loja ou filial com CNPJ próprio, cada uma entra como uma assinatura, com condições especiais para múltiplos CNPJs, fale com a gente."],
             ["Preciso instalar algum programa?", "Não. A Nuvix é 100% web: você acessa pelo navegador, do computador ou do celular, sem instalar nada e sem depender de servidor próprio."],
-            ["Meus dados ficam seguros e separados dos de outras empresas?", "Sim. Cada empresa tem seus dados isolados na nossa infraestrutura, ninguém de fora da sua empresa acessa suas informações."],
             ["A emissão de nota fiscal é de verdade, direto pra SEFAZ?", "Sim. NFC-e e NF-e são emitidas e autorizadas pela SEFAZ direto na venda, sem exportar planilha nem depender de outro sistema para faturar."],
             ["Funciona com Mercado Livre e outros marketplaces?", "Sim. Mercado Livre, Nuvemshop, Shopee e PedidoOK ficam conectados, venda feita no marketplace baixa o estoque na Nuvix automaticamente."],
             ["Tem teste grátis? Preciso de cartão de crédito?", "Sim, todo plano começa com teste grátis, sem cartão e sem compromisso."],
           ].map(([q, a]) => (
-            <details key={q} className="group px-8 py-6 open:bg-slate-50">
+            <details key={q} className="group px-6 py-5 open:bg-slate-50 md:px-8 md:py-6">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-slate-950">
                 {q}
                 <span className="flex-shrink-0 text-2xl font-black text-purple-600 transition-transform group-open:rotate-45">+</span>
@@ -637,12 +424,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contato" className="px-6 pb-24">
-        <div className="mx-auto max-w-7xl rounded-[40px] bg-gradient-to-r from-[#240B55] to-[#7C3AED] p-10 text-white shadow-soft md:p-16">
-          <div className="grid gap-8 md:grid-cols-[1.4fr_.6fr] md:items-center">
+      <section id="contato" className="px-6 pb-14 md:pb-24">
+        <div className="mx-auto max-w-7xl rounded-[32px] bg-gradient-to-r from-[#240B55] to-[#7C3AED] p-8 text-white shadow-soft md:rounded-[40px] md:p-16">
+          <div className="grid gap-6 md:grid-cols-[1.4fr_.6fr] md:items-center md:gap-8">
             <div>
-              <h2 className="text-4xl font-black tracking-tight md:text-5xl">Pronto para centralizar toda a operação da sua empresa?</h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-purple-100">
+              <h2 className="text-3xl font-black tracking-tight md:text-5xl">Pronto para centralizar toda a operação da sua empresa?</h2>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-purple-100 md:mt-5 md:text-lg md:leading-8">
                 Solicite uma demonstração e veja como a Nuvix pode simplificar sua gestão.
               </p>
             </div>
@@ -663,9 +450,7 @@ export default function Home() {
             <p className="font-black text-slate-950">Produto</p>
             <div className="mt-4 grid gap-3 text-slate-600">
               <a href="#produto">Plataforma</a>
-              <a href="#modulos">Módulos</a>
               <a href="#precos">Preços</a>
-              <a href="#solucoes">Soluções</a>
             </div>
           </div>
           <div>
@@ -697,7 +482,7 @@ export default function Home() {
           </div>
         </div>
         <div className="mx-auto mt-10 max-w-7xl border-t border-slate-100 pt-6 text-sm text-slate-400">
-          <p>Nuvix Hub · CNPJ 56.948.429/0001-60</p>
+          <p>Nuvix Hub · CNPJ 69.406.137/0001-47</p>
           <p className="mt-1">© 2026 Nuvix Hub. Todos os direitos reservados.</p>
         </div>
       </footer>

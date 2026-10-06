@@ -37,7 +37,7 @@ export default function Termos() {
         <section>
           <h2 className="text-lg font-black text-slate-950">1. Quem somos</h2>
           <p className="mt-3">
-            A Nuvix Hub (CNPJ 56.948.429/0001-60), aqui chamada de &quot;Nuvix&quot;, oferece uma
+            A Nuvix Hub (CNPJ 69.406.137/0001-47), aqui chamada de &quot;Nuvix&quot;, oferece uma
             plataforma de gestão empresarial (financeiro, comercial, ordens de serviço e estoque)
             contratada por outras empresas, aqui chamadas de &quot;cliente&quot; ou &quot;contratante&quot;.
           </p>

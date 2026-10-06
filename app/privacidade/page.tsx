@@ -37,7 +37,7 @@ export default function Privacidade() {
         <section>
           <h2 className="text-lg font-black text-slate-950">1. Quem somos</h2>
           <p className="mt-3">
-            A Nuvix Hub (CNPJ 56.948.429/0001-60) é a responsável pelo tratamento dos dados
+            A Nuvix Hub (CNPJ 69.406.137/0001-47) é a responsável pelo tratamento dos dados
             pessoais descritos nesta política, na condição de controladora, nos termos da Lei
             Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD).
           </p>
