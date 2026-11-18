@@ -24,7 +24,7 @@ function Logo() {
   return (
     <div className="flex items-center gap-3">
       <div className="h-11 w-11 overflow-hidden rounded-2xl shadow-lg shadow-purple-200">
-        <Image src="/logo-nuvixhub.png" alt="Nuvix" width={44} height={44} className="h-full w-full object-cover" />
+        <Image src="/nuvixhub-icone.png" alt="Nuvix" width={44} height={44} className="h-full w-full object-cover" />
       </div>
       <p className="whitespace-nowrap text-2xl leading-none tracking-tight text-[#2B2A36]">
         <span className="font-extrabold">Nuvix</span> <span className="font-medium">Hub</span>

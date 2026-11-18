@@ -5,7 +5,7 @@ function LogoSmall() {
   return (
     <Link href="/" className="flex items-center gap-3">
       <div className="h-9 w-9 overflow-hidden rounded-xl shadow-md shadow-purple-200">
-        <Image src="/logo-nuvixhub.png" alt="Nuvix" width={36} height={36} className="h-full w-full object-cover" />
+        <Image src="/nuvixhub-icone.png" alt="Nuvix" width={36} height={36} className="h-full w-full object-cover" />
       </div>
       <p className="whitespace-nowrap text-lg leading-none tracking-tight text-[#2B2A36]">
         <span className="font-extrabold">Nuvix</span> <span className="font-medium">Hub</span>
