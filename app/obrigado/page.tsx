@@ -35,7 +35,7 @@ export default function Obrigado() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-white px-6 text-center">
       <div className="h-14 w-14 overflow-hidden rounded-2xl shadow-lg shadow-purple-200">
-        <Image src="/logo.png" alt="Nuvix" width={56} height={56} className="h-full w-full object-cover" />
+        <Image src="/logo-nuvixhub.png" alt="Nuvix" width={56} height={56} className="h-full w-full object-cover" />
       </div>
       <div className="mt-8 grid h-16 w-16 place-items-center rounded-full bg-emerald-50 text-emerald-500">
         <CheckCircle2 size={32} />
