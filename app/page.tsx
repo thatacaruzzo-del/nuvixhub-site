@@ -26,10 +26,9 @@ function Logo() {
       <div className="h-11 w-11 overflow-hidden rounded-2xl shadow-lg shadow-purple-200">
         <Image src="/logo-nuvixhub.png" alt="Nuvix" width={44} height={44} className="h-full w-full object-cover" />
       </div>
-      <div className="leading-none">
-        <p className="text-xl font-black tracking-tight text-slate-950">Nuvix</p>
-        <p className="mt-1 text-xs font-bold tracking-[0.32em] text-purple-500">HUB</p>
-      </div>
+      <p className="whitespace-nowrap text-2xl leading-none tracking-tight text-[#2B2A36]">
+        <span className="font-extrabold">Nuvix</span> <span className="font-medium">Hub</span>
+      </p>
     </div>
   );
 }
